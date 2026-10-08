@@ -20,14 +20,17 @@
 
   var PREFIX = 'afru.';
   var PRICE_CACHE_KEY = PREFIX + 'prices';
-  var DEFAULTS = { theme: 'default', themeOverlays: true, relicLivePrices: true, collapseAds: false };
+  var DEFAULTS = { theme: 'default', themeOverlays: true, relicLivePrices: true, collapseAds: false, hiddenTabs: '' };
   var THEMES = { graphite: 1 };
   var REFINEMENTS = { intact: 'I', exceptional: 'E', flawless: 'F', radiant: 'R' };
   var config = {
     priceTtlMs: 60 * 60 * 1000,
+    // The relic overlay shows a cached price at once and asks again when it is older than this.
+    relicPriceMaxAgeMs: 10 * 60 * 1000,
     maxCachedPrices: 3000,
     // warframe.market allows about 3 requests per second.
-    requestGapMs: 350,
+    requestsPerSecond: 3,
+    maxParallelRequests: 3,
     requestTimeoutMs: 15000,
     setupPollMs: 100,
     setupPollLimit: 600,
@@ -90,6 +93,56 @@
     var active = THEMES[theme] && (!isOverlay || getSetting('themeOverlays'));
     if (active) html.setAttribute('data-afru-theme', theme);
     else html.removeAttribute('data-afru-theme');
+  }
+
+  // --------------------------------------------------------------- side menu
+
+  // Main window tabs that can be removed from the side menu. «Литейная» is the start tab and stays.
+  var HIDEABLE_TABS = [
+    ['tabMasteryHelper', 'Помощник мастерства'],
+    ['tabInventory', 'Инвентарь'],
+    ['tabRelicPlanner', 'Реликвии'],
+    ['tabRivenExplorer', 'Моды Разлома'],
+    ['tabWarframeMarket', 'Warframe Market'],
+    ['proAnalyticsTab', 'Аналитика торговли'],
+    ['tabStats', 'Статистика'],
+    ['tabAbout', 'Справка'],
+  ];
+  var START_TAB = 'tabFoundry';
+
+  function menuItem(tabId) { return doc.querySelector('.topMenuGroup > .menuItem[tabid="' + tabId + '"]'); }
+
+  function hiddenTabs() {
+    var known = {};
+    HIDEABLE_TABS.forEach(function (tab) { known[tab[0]] = true; });
+    return String(getSetting('hiddenTabs') || '').split(',').filter(function (id) { return known[id]; });
+  }
+
+  function applyHiddenTabs() {
+    if (page !== 'main') return;
+    var parent = doc.head || doc.documentElement;
+    if (!parent) return;
+    var style = doc.getElementById('afru-hidden-tabs');
+    if (!style) {
+      style = doc.createElement('style');
+      style.id = 'afru-hidden-tabs';
+      parent.appendChild(style);
+    }
+    var ids = hiddenTabs();
+    style.textContent = ids.length
+      ? ids.map(function (id) { return '.topMenuGroup > .menuItem[tabid="' + id + '"]'; }).join(',\n') + ' { display: none !important; }'
+      : '';
+    // Hiding the open tab would leave its page without a menu entry: go back to the start tab.
+    var selected = doc.querySelector('.topMenuGroup > .menuItem.selected');
+    var start = menuItem(START_TAB);
+    if (selected && start && ids.indexOf(selected.getAttribute('tabid')) >= 0) start.click();
+  }
+
+  function setTabHidden(tabId, hidden) {
+    var ids = hiddenTabs().filter(function (id) { return id !== tabId; });
+    if (hidden) ids.push(tabId);
+    setSetting('hiddenTabs', ids.join(','));
+    applyHiddenTabs();
   }
 
   // --------------------------------------------------------------------- ads
@@ -228,16 +281,44 @@
     } catch (e) { return null; }
   }
 
-  var lastRequestAt = 0;
-  var requestChain = Promise.resolve();
+  // Requests start in order, at most config.requestsPerSecond per second and
+  // config.maxParallelRequests at a time, so four relic rewards are asked for together.
+  var queue = [];
+  var recentStarts = [];
+  var running = 0;
+  var pumpTimer = null;
 
-  /** Calls GetBuySellWindowData one request at a time; resolves to { data } or { error }. */
+  function pump() {
+    pumpTimer = null;
+    while (queue.length && running < config.maxParallelRequests) {
+      var t = now();
+      recentStarts = recentStarts.filter(function (s) { return t - s < 1000; });
+      if (recentStarts.length >= config.requestsPerSecond) {
+        pumpTimer = root.setTimeout(pump, recentStarts[0] + 1000 - t);
+        return;
+      }
+      recentStarts.push(t);
+      running++;
+      queue.shift()();
+    }
+  }
+
+  function schedule(job) {
+    return new Promise(function (resolve) {
+      queue.push(function () {
+        job().then(function (result) {
+          running--;
+          resolve(result);
+          if (!pumpTimer) pump();
+        });
+      });
+      if (!pumpTimer) pump();
+    });
+  }
+
+  /** Calls GetBuySellWindowData; resolves to { data } or { error }. */
   function requestListings(name) {
-    var job = requestChain.then(function () {
-      var wait = Math.max(0, lastRequestAt + config.requestGapMs - now());
-      return new Promise(function (resolve) { root.setTimeout(resolve, wait); });
-    }).then(function () {
-      lastRequestAt = now();
+    return schedule(function () {
       return new Promise(function (resolve) {
         var client = marketClient();
         if (!client) { resolve({ error: 'unavailable' }); return; }
@@ -257,8 +338,6 @@
         } catch (e) { finish({ error: 'call' }); }
       });
     });
-    requestChain = job;
-    return job;
   }
 
   /** Resolves to { entry: { s, b, t } } or { error }. Prices are cached for every window. */
@@ -299,15 +378,61 @@
     return item && item.name ? freshPrice(priceKey(item.name, itemVariant(item))) : null;
   }
 
-  function applyCachedPrices() {
+  /** Puts cached prices on the listed items; with resort, restores the price order if a price changed. */
+  function applyCachedPrices(resort) {
     var items = inventoryItems();
+    var changed = false;
     for (var i = 0; i < items.length; i++) {
       var entry = cachedEntryFor(items[i]);
       if (!entry) continue;
-      if (entry.s != null && items[i].sellPrice !== entry.s) items[i].sellPrice = entry.s;
-      if (entry.b != null && items[i].buyPrice !== entry.b) items[i].buyPrice = entry.b;
+      if (entry.s != null && items[i].sellPrice !== entry.s) { items[i].sellPrice = entry.s; changed = true; }
+      if (entry.b != null && items[i].buyPrice !== entry.b) { items[i].buyPrice = entry.b; changed = true; }
     }
+    if (changed && resort) sortByPrice();
     markFreshCards();
+  }
+
+  // AlecaFrame sorts the list in its plugin, by the prices it had when the list was loaded.
+  function sortValue(item, order) {
+    var price = Number(item.sellPrice);
+    if (!(price > 0)) return null;
+    if (order === 'platPrice') return price;
+    var ducats = Number(item.ducats);
+    return ducats > 0 ? ducats / price : null; // ducanator: ducats per platinum, as on the cards
+  }
+
+  /**
+   * Re-sorts the list by the current sell prices when it is ordered by platinum (or ducats per
+   * platinum), in AlecaFrame's current direction (largest first by default). Items without a price
+   * go last; equal prices keep their order.
+   */
+  function sortByPrice() {
+    var select = doc.getElementById('inventoryOrdering');
+    var order = select ? select.value : '';
+    if (order !== 'platPrice' && order !== 'ducanator') return false;
+    var items = inventoryItems();
+    if (items.length < 2 || typeof items.splice !== 'function') return false;
+    var descending = root.orderedLargerToSmaller !== false;
+    var ranked = Array.prototype.map.call(items, function (item, index) {
+      return { item: item, index: index, value: item ? sortValue(item, order) : null };
+    });
+    ranked.sort(function (a, b) {
+      if (a.value == null || b.value == null) {
+        if (a.value == null && b.value == null) return a.index - b.index;
+        return a.value == null ? 1 : -1;
+      }
+      if (a.value !== b.value) return descending ? b.value - a.value : a.value - b.value;
+      return a.index - b.index;
+    });
+    if (ranked.every(function (r, i) { return r.index === i; })) return false;
+    // In place: AlecaFrame's `items` watcher (and ours) only fire when the list is replaced.
+    items.splice.apply(items, [0, items.length].concat(ranked.map(function (r) { return r.item; })));
+    return true;
+  }
+
+  function displayedName(name) {
+    var ru = root.__AF_RU__ && root.__AF_RU__.translate(name);
+    return ru || name;
   }
 
   // Cards follow the items order (v-for); the name check guards against a render in progress.
@@ -319,7 +444,9 @@
       for (var i = 0; i < cards.length; i++) {
         var label = cards[i].querySelector('.inventoryItemName');
         var item = items[i];
-        var matches = item && label && label.textContent.trim() === String(item.name).trim();
+        var shown = label ? label.textContent.trim() : '';
+        var name = item ? String(item.name).trim() : '';
+        var matches = item && label && (shown === name || shown === displayedName(name).trim());
         if (matches && cachedEntryFor(item)) cards[i].setAttribute('data-afru-fresh', '');
         else cards[i].removeAttribute('data-afru-fresh');
       }
@@ -393,6 +520,8 @@
       (function next(index) {
         if (run.stopped || index >= jobs.length) {
           refreshRun = null;
+          // Cards stay in place while prices arrive and are re-sorted once at the end.
+          if (run.updated && sortByPrice()) markFreshCards();
           lastRefresh = {
             at: now(), updated: run.updated, total: run.total, failed: run.failed,
             stopped: run.stopped && !run.unavailable, error: run.unavailable && !run.updated ? 'unavailable' : null,
@@ -403,7 +532,7 @@
         }
         fetchPrice(jobs[index].name, jobs[index].variant).then(function (res) {
           run.done++;
-          if (res.entry) { run.updated++; applyCachedPrices(); }
+          if (res.entry) { run.updated++; applyCachedPrices(false); }
           else if (res.error === 'unavailable') { run.unavailable = true; run.stopped = true; }
           else run.failed++;
           renderChip();
@@ -435,8 +564,9 @@
     var bar = doc.querySelector('#tabInventory .foundryTopSettingsSide.right');
     if (!app || typeof app.$watch !== 'function' || !bar) return false;
     if (!doc.getElementById('afruPriceRefresh')) bar.insertBefore(buildChip(), bar.firstChild);
-    app.$watch('items', applyCachedPrices);
-    applyCachedPrices();
+    // A list loaded by AlecaFrame is sorted by its own prices: apply ours and sort again.
+    app.$watch('items', function () { applyCachedPrices(true); });
+    applyCachedPrices(true);
     renderChip();
     return true;
   }
@@ -452,6 +582,11 @@
     if (live) live.checked = getSetting('relicLivePrices');
     var ads = doc.getElementById('afruCollapseAds');
     if (ads) ads.checked = getSetting('collapseAds');
+    var hidden = hiddenTabs();
+    HIDEABLE_TABS.forEach(function (tab) {
+      var box = doc.getElementById('afruTab-' + tab[0]);
+      if (box) box.checked = hidden.indexOf(tab[0]) < 0;
+    });
   }
 
   function checkboxRow(id, text, extraClass) {
@@ -487,10 +622,23 @@
         ]),
       ]),
       el('div', { 'class': 'settingsGroup' }, [
+        el('span', { 'class': 'settingsTitle' }, ['Вкладки бокового меню']),
+        el('div', { 'class': 'afru-tabList' }, HIDEABLE_TABS
+          .filter(function (tab) { return menuItem(tab[0]); })
+          .map(function (tab) { return checkboxRow('afruTab-' + tab[0], tab[1]); })),
+        el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
+          'Снятая галочка убирает вкладку из меню слева. «Литейная» остаётся всегда.',
+        ]),
+      ]),
+      el('div', { 'class': 'settingsGroup' }, [
         el('span', { 'class': 'settingsTitle' }, ['Цены warframe.market']),
         checkboxRow('afruRelicLive', 'Уточнять цены наград в окне реликвии по текущим заказам'),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Кнопка «Обновить цены» во вкладке «Инвентарь» берёт заказы игроков онлайн через встроенный в AlecaFrame ' +
+          'Окно наград сразу показывает сохранённую цену, а если ей больше 10 минут — запрашивает новую; ' +
+          'разные награды запрашиваются одновременно.',
+        ]),
+        el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
+          'Кнопка «Обновит�� цены» во вкладке «Инвентарь» берёт заказы игроков онлайн через встроенный в AlecaFrame ' +
           'клиент warframe.market. Обновлённые цены хранятся 1 час.',
         ]),
         el('div', { 'class': 'settingsCheckBoxHolder' }, [clearButton, clearStatus]),
@@ -501,6 +649,10 @@
     tab.querySelector('#afruThemeOverlays').addEventListener('change', function (e) { setSetting('themeOverlays', e.target.checked); });
     tab.querySelector('#afruRelicLive').addEventListener('change', function (e) { setSetting('relicLivePrices', e.target.checked); });
     tab.querySelector('#afruCollapseAds').addEventListener('change', function (e) { setAdsCollapsed(e.target.checked); });
+    HIDEABLE_TABS.forEach(function (item) {
+      var box = tab.querySelector('#afruTab-' + item[0]);
+      if (box) box.addEventListener('change', function (e) { setTabHidden(item[0], !e.target.checked); });
+    });
     clearButton.addEventListener('click', function () {
       clearPrices();
       lastRefresh = null;
@@ -547,19 +699,39 @@
     return best;
   }
 
+  // Relic rewards that have no orders on warframe.market.
+  var UNTRADEABLE_REWARD = /^(\d+\s*x\s*)?forma blueprint$|^riven sliver$|^exilus .*adapter( blueprint)?$|^kuva$|^void traces$/i;
+
+  /**
+   * A cached price shows at once; one request per distinct reward (a squad often gets the same
+   * part twice) refreshes it when it is older than config.relicPriceMaxAgeMs.
+   */
   function refreshRelicPrices(list) {
     var app = root.relicsApp;
     if (!list || !list.length) return;
+    var byName = {};
     for (var i = 0; i < list.length; i++) {
-      (function (relic) {
-        if (!relic || !relic.name || relic.detected === false) return;
-        var cached = freshPrice(priceKey(relic.name, null));
-        if (cached) { if (cached.s != null) relic.platinum = cached.s; return; }
-        fetchPrice(relic.name, null).then(function (res) {
-          if (res.entry && res.entry.s != null && app.relics === list) relic.platinum = res.entry.s;
-        });
-      })(list[i]);
+      var relic = list[i];
+      if (!relic || !relic.name || relic.detected === false || UNTRADEABLE_REWARD.test(String(relic.name).trim())) continue;
+      (byName[relic.name] = byName[relic.name] || []).push(relic);
     }
+    Object.keys(byName).forEach(function (name) {
+      function show(entry) {
+        if (!entry || entry.s == null || app.relics !== list) return;
+        byName[name].forEach(function (reward) { reward.platinum = entry.s; });
+      }
+      var cached = freshPrice(priceKey(name, null));
+      show(cached);
+      if (cached && now() - cached.t < config.relicPriceMaxAgeMs) return;
+      fetchPrice(name, null).then(function (res) { show(res.entry); });
+    });
+  }
+
+  // AlecaFrame starts the overlay on window.onload, which also waits for the ad frames, or
+  // 350 ms after its script ran. The DOM is complete earlier, at DOMContentLoaded.
+  function startRelicWindowEarly() {
+    if (typeof root.RelicWindowInitialization !== 'function' || root.relicWindowInitialized) return;
+    try { root.RelicWindowInitialization(); } catch (e) { warn('early relic window start failed', e); }
   }
 
   function setupRelicOverlay() {
@@ -602,7 +774,7 @@
     }, config.setupPollMs);
   }
 
-  function applyDocumentState() { applyTheme(); applyAdLayout(); }
+  function applyDocumentState() { applyTheme(); applyAdLayout(); applyHiddenTabs(); }
 
   if (page === 'main') watchAdInstance();
   // The installer puts the script right after <head>; when run even earlier there is no <html> yet.
@@ -621,6 +793,7 @@
     setSetting: setSetting,
     applyTheme: applyTheme,
     setAdsCollapsed: setAdsCollapsed,
+    setTabHidden: setTabHidden,
     pickPrices: pickPrices,
     priceKey: priceKey,
     fetchPrice: fetchPrice,
@@ -629,5 +802,8 @@
   };
 
   if (page === 'main') whenReady([setupInventory, setupSettingsTab, setupAdStrip]);
-  else if (page === 'relicOverlay') whenReady([setupRelicOverlay]);
+  else if (page === 'relicOverlay') {
+    doc.addEventListener('DOMContentLoaded', startRelicWindowEarly);
+    whenReady([setupRelicOverlay]);
+  }
 })(typeof window !== 'undefined' ? window : null, /*__AF_RU_EXTRAS_CSS__*/ '');

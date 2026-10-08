@@ -1,7 +1,3 @@
 @echo off
-setlocal
-title AlecaFrame-RU
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0windows\Start.ps1"
-set "code=%ERRORLEVEL%"
-if not "%code%"=="0" pause
-exit /b %code%
+rem Start.cmd from older versions now does the same as Install.cmd: install once, then it runs by itself.
+call "%~dp0Install.cmd" %*

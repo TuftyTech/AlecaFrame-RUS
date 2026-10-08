@@ -17,6 +17,9 @@ importers:
       jsdom:
         specifier: ^30.1.2
         version: 30.1.2
+      lzma:
+        specifier: 2.3.2
+        version: 2.3.2
       playwright-core:
         specifier: ^1.64.0
         version: 1.64.0
@@ -184,6 +187,10 @@ packages:
   lru-cache@11.5.3:
     resolution: {integrity: sha512-U4N8FgzmWxc8k1VH8Kr6lQg18U7Fjvby6wXHVRX/ZZ7IwWbRMgrRbP0Wrb5q5NVinryp4SQampHKdvtecItxUg==}
     engines: {node: 20 || >=22}
+
+  lzma@2.3.2:
+    resolution: {integrity: sha512-DcfiawQ1avYbW+hsILhF38IKAlnguc/fjHrychs9hdxe4qLykvhT5VTGNs5YRWgaNePh7NTxGD4uv4gKsRomCQ==}
+    hasBin: true
 
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
@@ -465,6 +472,8 @@ snapshots:
       - '@noble/hashes'
 
   lru-cache@11.5.3: {}
+
+  lzma@2.3.2: {}
 
   magic-string@0.25.9:
     dependencies:

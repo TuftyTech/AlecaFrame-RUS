@@ -163,3 +163,9 @@ html[data-afru-ads="collapsed"] .afru-adExpand {
     font-size: 14px;
     color: var(--color-navigation-hover);
 }
+
+.afru-tabList {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 16px;
+}

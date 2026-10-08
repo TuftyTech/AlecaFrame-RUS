@@ -1,28 +1,52 @@
-﻿$ErrorActionPreference = 'Stop'
+﻿# Полное удаление AlecaFrame-RU: агент, ярлыки, запись в «Приложениях», исходные файлы AlecaFrame.
+# Запускается из Uninstall.cmd и из «Параметры -> Приложения» (оттуда с -Pause).
+param([switch]$Pause)
+$ErrorActionPreference = 'Stop'
 Import-Module (Join-Path $PSScriptRoot 'AlecaFrameRU.psm1') -Force
 
-$appId          = Get-AfruAppId
-$extensionsRoot = Join-Path $env:LOCALAPPDATA "Overwolf\Extensions\$appId"
-$stateRoot      = Join-Path $env:LOCALAPPDATA 'AlecaFrame-RU'
+$paths = Get-AfruPaths
+$exitCode = 0
+
+function Remove-StateFolder {
+    # Этот скрипт может лежать внутри удаляемой папки: уходим из неё, а если Windows держит файл — удаляем чуть позже.
+    Set-Location -LiteralPath ([IO.Path]::GetTempPath())
+    if (-not (Test-Path -LiteralPath $paths.State)) { return }
+    try { Remove-Item -LiteralPath $paths.State -Recurse -Force }
+    catch {
+        Start-Process -FilePath 'cmd.exe' -WindowStyle Hidden `
+            -ArgumentList "/c ping -n 4 127.0.0.1 >nul & rmdir /s /q `"$($paths.State)`""
+    }
+}
 
 try {
     Write-Host ''
-    if (Get-Process -Name 'Overwolf' -ErrorAction SilentlyContinue) {
-        Write-Host '  Закрываю Overwolf, чтобы вернуть файлы...'
+    $null = Stop-AfruAgent -AgentPath $paths.Agent
+    $null = Stop-AfruLegacySession
+
+    # Overwolf, запущенный агентом, работает без проверки файлов: перезапускаем его обычным образом.
+    $overwolf = $null
+    $flagState = Get-AfruFlagState -Processes @(Get-AfruOverwolfProcess) -Flags (Get-AfruFlags $false)
+    if ($flagState -eq 'ok') {
+        try { $overwolf = Find-AfruOverwolf } catch { }
+        Write-Host '  Закрываю Overwolf, запущенный с отключённой проверкой файлов...'
         Stop-AfruOverwolf
     }
-    if (Test-Path -LiteralPath $extensionsRoot) {
-        $count = 0
-        foreach ($dir in Get-ChildItem -LiteralPath $extensionsRoot -Directory) {
-            $backupRoot = Join-Path (Join-Path $stateRoot 'backup') $dir.Name
-            $count += @(Remove-AfruLocalizer -VersionPath $dir.FullName -ExtensionsRoot $extensionsRoot -BackupRoot $backupRoot).Count
-        }
-        Write-Host "  Исходные файлы AlecaFrame возвращены (изменённых страниц: $count)."
+
+    $count = Restore-AfruAll -ExtensionsRoot $paths.Extensions -BackupRoot $paths.Backup
+    Write-Host "  Исходные файлы AlecaFrame возвращены (изменённых страниц: $count)."
+    Unregister-AfruIntegration -Paths $paths
+    Write-Host '  Удалены автозапуск, ярлыки «AlecaFrame (русский)» и запись в «Приложениях».'
+    Remove-StateFolder
+
+    if ($overwolf) {
+        Start-Process -FilePath $overwolf.Overwolf
+        Write-Host '  Overwolf запущен заново, как обычно.'
     }
-    if (Test-Path -LiteralPath $stateRoot) { Remove-Item -LiteralPath $stateRoot -Recurse -Force }
-    Write-Host '  Готово. Запускайте AlecaFrame как обычно, через Overwolf.' -ForegroundColor Green
+    Write-Host '  Готово: AlecaFrame-RU удалён. AlecaFrame работает как обычно, на английском.' -ForegroundColor Green
 }
 catch {
     Write-Host "  Ошибка: $($_.Exception.Message)" -ForegroundColor Red
-    exit 1
+    $exitCode = 1
 }
+if ($Pause) { $null = Read-Host '  Нажмите Enter, чтобы закрыть окно' }
+exit $exitCode

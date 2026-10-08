@@ -29,7 +29,7 @@ function open(page, body, { storage = {}, market } = {}) {
   }
   win.eval(VUE);
   win.eval(BUNDLE);
-  win.__AF_RU_EXTRAS__.config.requestGapMs = 0;
+  win.__AF_RU_EXTRAS__.config.requestsPerSecond = 1000;
   return { dom, win, doc: win.document, calls };
 }
 
@@ -216,6 +216,62 @@ test('inventory: «Обновить цены» loads warframe.market prices, mar
   win.close();
 });
 
+const ORDERING = (value) => `<select id="inventoryOrdering"><option value="name">Name</option><option value="platPrice">Platinum</option></select>`
+  .replace(`value="${value}"`, `value="${value}" selected`);
+const SORT_ITEMS = [
+  { name: 'Alternox Prime Stock', type: 'part', sellPrice: 14 },
+  { name: 'Nova Prime Systems Blueprint', type: 'part', sellPrice: 10 },
+  { name: 'Vasto Prime Barrel', type: 'part', sellPrice: 9 },
+  { name: 'Forma Blueprint', type: 'part', sellPrice: 0 },
+  { name: 'Corufell Prime Stock', type: 'part', sellPrice: 5 },
+];
+const SORT_MARKET = {
+  'Alternox Prime Stock': { sellListings: [{ platimun: 9 }] },
+  'Nova Prime Systems Blueprint': { sellListings: [{ platimun: 13 }] },
+  'Corufell Prime Stock': { sellListings: [{ platimun: 11 }] },
+};
+const names = (win) => [...win.inventoryApp.items].map((i) => i.name);
+
+test('inventory: sorted by platinum, the list follows the refreshed sell prices', async () => {
+  const { win, doc } = open('main.html', ORDERING('platPrice') + INVENTORY, { market: SORT_MARKET });
+  win.eval(`var orderedLargerToSmaller = true; inventoryApp = Vue.createApp({ data: () => ({ items: ${JSON.stringify(SORT_ITEMS)} }) }).mount('#tabInventory')`);
+  await waitFor(() => doc.getElementById('afruPriceRefresh'), 'refresh button');
+  await win.__AF_RU_EXTRAS__.refreshInventoryPrices();
+  assert.deepEqual(names(win), [
+    'Nova Prime Systems Blueprint', // 13
+    'Corufell Prime Stock', // 11
+    'Alternox Prime Stock', // 9, listed before Vasto by AlecaFrame
+    'Vasto Prime Barrel', // 9
+    'Forma Blueprint', // no price: last
+  ]);
+  await waitFor(() => doc.querySelectorAll('[data-afru-fresh]').length === 3, 'fresh markers after sorting');
+  const cards = [...doc.querySelectorAll('.inventoryObject')];
+  assert.deepEqual(cards.map((c) => c.querySelector('.inventorySellPrice').textContent), ['13', '11', '9', '9', '0']);
+  assert.deepEqual(cards.map((c) => c.hasAttribute('data-afru-fresh')), [true, true, true, false, false]);
+
+  // AlecaFrame reloads the list sorted by its old prices; the cached ones put it back in order.
+  win.inventoryApp.items = JSON.parse(JSON.stringify(SORT_ITEMS));
+  await waitFor(() => names(win)[0] === 'Nova Prime Systems Blueprint', 'order restored on reload');
+  assert.equal(names(win)[1], 'Corufell Prime Stock');
+
+  // Smallest first when AlecaFrame's direction toggle is reversed; unpriced items still go last.
+  win.orderedLargerToSmaller = false;
+  win.inventoryApp.items = JSON.parse(JSON.stringify(SORT_ITEMS));
+  await waitFor(() => names(win)[0] === 'Alternox Prime Stock', 'ascending order');
+  assert.deepEqual(names(win).slice(-2), ['Nova Prime Systems Blueprint', 'Forma Blueprint']);
+  win.close();
+});
+
+test('inventory: other orderings are left as AlecaFrame sorted them', async () => {
+  const { win, doc } = open('main.html', ORDERING('name') + INVENTORY, { market: SORT_MARKET });
+  win.eval(`inventoryApp = Vue.createApp({ data: () => ({ items: ${JSON.stringify(SORT_ITEMS)} }) }).mount('#tabInventory')`);
+  await waitFor(() => doc.getElementById('afruPriceRefresh'), 'refresh button');
+  await win.__AF_RU_EXTRAS__.refreshInventoryPrices();
+  assert.deepEqual(names(win), SORT_ITEMS.map((i) => i.name));
+  assert.equal(win.inventoryApp.items[1].sellPrice, 13);
+  win.close();
+});
+
 test('inventory: reports a missing market client instead of failing silently', async () => {
   const { win, doc } = open('main.html', INVENTORY);
   win.eval(`inventoryApp = Vue.createApp({ data: () => ({ items: ${JSON.stringify(ITEMS.slice(0, 2))} }) }).mount('#tabInventory')`);
@@ -257,6 +313,46 @@ test('settings: AlecaFrame-RU tab switches the theme for this and other windows'
   win.close();
 });
 
+const MENU = `
+  <div class="topMenuGroup">
+    <div class="menuItem selected" tabId="tabFoundry">Foundry</div>
+    <div class="menuItem" tabId="tabInventory">Inventory</div>
+    <div class="menuItem" tabId="proAnalyticsTab">Trading Analytics</div>
+    <div class="menuItem" tabId="tabStats">Stats</div>
+  </div>`;
+
+test('side menu: tabs hidden in settings disappear, the open one falls back to Foundry', async () => {
+  const { win, doc } = open('main.html', MENU + SETTINGS, { storage: { 'afru.hiddenTabs': 'tabStats,unknownTab' } });
+  // AlecaFrame's onclick="menuPressed(event)"; inline handlers do not run in this JSDOM mode.
+  win.eval(`document.querySelectorAll('.menuItem').forEach((item) => item.addEventListener('click', (e) => {
+    document.querySelectorAll('.menuItem').forEach((m) => m.classList.toggle('selected', m === e.currentTarget));
+  }));`);
+  win.settingsApp = {};
+  await waitFor(() => doc.getElementById('afruSettingsTab'), 'settings tab');
+  const rule = () => doc.getElementById('afru-hidden-tabs').textContent;
+  const hidden = () => [...doc.querySelectorAll('.menuItem')].filter((m) => rule() && m.matches(rule().replace(/\s*\{[^}]*\}\s*$/, ''))).map((m) => m.getAttribute('tabid'));
+  assert.deepEqual(hidden(), ['tabStats']);
+  assert.match(rule(), /display: none !important/);
+
+  const boxes = [...doc.querySelectorAll('.afru-tabList input')].map((b) => [b.id, b.checked]);
+  assert.deepEqual(boxes, [['afruTab-tabInventory', true], ['afruTab-proAnalyticsTab', true], ['afruTab-tabStats', false]], 'only tabs present in this AlecaFrame version are listed');
+
+  doc.querySelector('[tabid="proAnalyticsTab"]').click();
+  assert.equal(doc.querySelector('.menuItem.selected').getAttribute('tabid'), 'proAnalyticsTab');
+  const analytics = doc.getElementById('afruTab-proAnalyticsTab');
+  analytics.checked = false;
+  analytics.dispatchEvent(new win.Event('change'));
+  assert.deepEqual(hidden(), ['proAnalyticsTab', 'tabStats']);
+  assert.equal(win.localStorage.getItem('afru.hiddenTabs'), 'tabStats,proAnalyticsTab');
+  assert.equal(doc.querySelector('.menuItem.selected').getAttribute('tabid'), 'tabFoundry', 'the hidden open tab is left');
+
+  win.localStorage.setItem('afru.hiddenTabs', '');
+  win.dispatchEvent(new win.StorageEvent('storage', { key: 'afru.hiddenTabs' }));
+  assert.equal(rule(), '');
+  assert.equal(doc.getElementById('afruTab-tabStats').checked, true);
+  win.close();
+});
+
 const RELICS = `
   <div class="relicPart"><div class="relicHolder">
     <div v-for="relic in relics" class="relic" :class="{ relicMaxPrice: relicMaxPrice(relic) }" :data-name="relic.name">{{ relic.platinum }}</div>
@@ -275,8 +371,9 @@ test('relic overlay: no "best" highlight without prices, live prices move it', a
   await waitFor(() => doc.querySelectorAll('.relicMaxPrice').length === 2, 'original highlight');
 
   await waitFor(() => win.__AF_RU_EXTRAS__.ready.setupRelicOverlay, 'relic overlay hooks');
-  await waitFor(() => calls.length === 2, 'live price requests');
+  await waitFor(() => calls.length === 1, 'live price requests');
   await new Promise((r) => setTimeout(r, 20));
+  assert.deepEqual(calls, ['Lith A1 Relic'], 'Forma has no orders and is not requested');
   assert.equal(doc.querySelectorAll('.relicMaxPrice').length, 0);
 
   win.relicsApp.relics = [
@@ -288,6 +385,65 @@ test('relic overlay: no "best" highlight without prices, live prices move it', a
   assert.equal(win.relicsApp.relics[1].platinum, 18);
   assert.equal(win.relicsApp.relics[0].platinum, 11, 'rewards without listings keep their price');
   assert.ok(!calls.slice(2).includes('Forma Blueprint'), 'undetected rewards are not requested');
+  win.close();
+});
+
+test('relic overlay: distinct rewards are requested together, cached ones show at once', async () => {
+  const { win, doc } = open('relicOverlay.html', RELICS, {
+    storage: {
+      'afru.prices': JSON.stringify({
+        'fresh part|': { s: 40, b: 30, t: Date.now() - 60 * 1000 },
+        'stale part|': { s: 7, b: 5, t: Date.now() - 30 * 60 * 1000 },
+      }),
+    },
+  });
+  const calls = [];
+  let inFlight = 0;
+  let maxInFlight = 0;
+  const prices = { 'Stale Part': 9, 'Part A': 15, 'Part B': 25, 'Part C': 35, 'Part D': 45 };
+  win.plugin = {
+    get: () => ({
+      GetBuySellWindowData(name, cb) {
+        calls.push(name);
+        maxInFlight = Math.max(maxInFlight, ++inFlight);
+        setTimeout(() => { inFlight--; cb(true, JSON.stringify({ sellListings: [{ platimun: prices[name] }] }), '[]'); }, 40);
+      },
+    }),
+  };
+  win.eval(RELIC_APP);
+  await waitFor(() => win.__AF_RU_EXTRAS__.ready.setupRelicOverlay, 'relic overlay hooks');
+  win.relicsApp.relics = [
+    { name: 'Fresh Part', platinum: 1, detected: true },
+    { name: 'Stale Part', platinum: 1, detected: true },
+    { name: 'Part A', platinum: 1, detected: true },
+    { name: 'Part A', platinum: 1, detected: true },
+  ];
+  const rewards = () => win.relicsApp.relics.map((r) => r.platinum);
+  // Vue runs the watcher before the next render, so the first frame already has these.
+  await win.relicsApp.$nextTick();
+  assert.deepEqual([...doc.querySelectorAll('.relic')].map((r) => r.textContent.trim()), ['40', '7', '1', '1'], 'cached prices replace AlecaFrame ones right away');
+  await waitFor(() => rewards()[3] === 15, 'live prices');
+  assert.deepEqual(rewards(), [40, 9, 15, 15]);
+  assert.deepEqual(calls, ['Stale Part', 'Part A'], 'one request per distinct stale reward');
+
+  calls.length = 0;
+  win.relicsApp.relics = ['Part B', 'Part C', 'Part D', 'Part E'].map((name) => ({ name, platinum: 1, detected: true }));
+  await waitFor(() => calls.length === 4, 'four requests');
+  assert.equal(maxInFlight, 3, 'up to three requests run at the same time');
+  await waitFor(() => win.relicsApp.relics[2].platinum === 45, 'the fourth price');
+  assert.equal(doc.querySelector('.relicMaxPrice')?.dataset.name, 'Part D');
+  win.close();
+});
+
+test('relic overlay: AlecaFrame start is not delayed until window.onload', async () => {
+  const dom = new JSDOM('<!doctype html><html><head></head><body></body></html>', { url: 'http://localhost/web/relicOverlay.html', runScripts: 'outside-only' });
+  const win = dom.window;
+  win.eval(BUNDLE);
+  win.eval('var relicWindowInitialized = false; var started = 0; function RelicWindowInitialization() { if (relicWindowInitialized) return; relicWindowInitialized = true; started++; } window.onload = RelicWindowInitialization;');
+  win.document.dispatchEvent(new win.Event('DOMContentLoaded'));
+  assert.equal(win.eval('started'), 1);
+  win.dispatchEvent(new win.Event('load'));
+  assert.equal(win.eval('started'), 1, 'the later onload call is skipped by AlecaFrame itself');
   win.close();
 });
 

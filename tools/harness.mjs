@@ -41,8 +41,8 @@ export const OVERWOLF_STUB = `(() => {
   window.overwolf = new Proxy({}, { get: (t, k) => spaces[k] || P });
 })();`;
 
-/** Runs in the page: visible elements whose own text is clipped. */
-export function collectOverflows() {
+/** Runs in the page: visible elements (inside `scope`, if given) whose own text is clipped. */
+export function collectOverflows(scope) {
   const out = [];
   const cssPath = (el) => {
     const parts = [];
@@ -54,7 +54,7 @@ export function collectOverflows() {
     }
     return parts.join(' > ');
   };
-  for (const el of document.querySelectorAll('body *')) {
+  for (const el of document.querySelectorAll(scope ? `${scope} *` : 'body *')) {
     if (!el.getClientRects().length || !el.clientWidth) continue;
     const ownText = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.nodeValue).join('').trim();
     if (!/[A-Za-zА-Яа-яЁё]{2}/.test(ownText)) continue;

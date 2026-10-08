@@ -6,3 +6,78 @@
 html[lang="ru"] .statsFilterTypeHolder .topSetting.stats {
     padding-right: 4px;
 }
+
+/* Item details: the right half may shrink, so a narrow window squeezes the stats instead of
+   pushing them past the modal edge. */
+html[lang="ru"] .foundryDetailsTopRight,
+html[lang="ru"] .foudnryDetailsCustomGeneralContainerWeaponShoot,
+html[lang="ru"] .foudnryDetailsCustomGeneralContainerWeaponMelee {
+    min-width: 0;
+}
+
+/* Item details → weapon attack modes: the stats below the mode tabs are height:100%, so when
+   Russian labels wrap, the tabs were squeezed and their text was cut off at the top. */
+html[lang="ru"] .foundryDetailsWeaponShootModesHeader {
+    flex-shrink: 0;
+}
+
+html[lang="ru"] .foundryDetailsWeaponShootModesBody {
+    flex: 1 1 0;
+    min-height: 0;
+}
+
+/* Two-line Russian tab labels («Форма Инкарнона») need less padding than one-line English ones. */
+html[lang="ru"] .foundryDetailsAttackModeListItem {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+html[lang="ru"] .foundryDetailsCustomGeneralEntry.mode {
+    gap: 5px;
+}
+
+html[lang="ru"] .foundryDetailsCustomGeneralEntry.mode .foundryDetailsCustomGeneralEntryKey,
+html[lang="ru"] .foundryDetailsCustomGeneralEntry.mode .foundryDetailsCustomGeneralEntryValue {
+    font-size: 14px;
+}
+
+/* Item details: values are capitalized word by word for English data («Мод Варфрейма»,
+   «Статусный Эффект Разрезания На Врагах…»); the translations already have proper case. */
+html[lang="ru"] .foundryDetailsCustomGeneralEntryValue {
+    text-transform: none;
+}
+
+/* Item details → selected component: Russian descriptions are ~30% longer than the 92px box. */
+html[lang="ru"] .foundryDetailsComponentDataDescription {
+    font-size: 13px;
+    line-height: 1.25;
+}
+
+/* Item details → «Продам» / «Куплю» and a three-digit price did not fit two 93px buttons.
+   The column grows by 8px (the drop list beside it still fits its widest 365px row), and the
+   price keeps its -9px margin, so the label gap stays 3px. */
+html[lang="ru"] .foundryDetailsBottomRightData {
+    width: 200px;
+}
+
+html[lang="ru"] .foundryDetailsComponentPriceHolder {
+    gap: 4px;
+}
+
+html[lang="ru"] .foundryDetailsComponentPriceSell,
+html[lang="ru"] .foundryDetailsComponentPriceBuy {
+    font-size: 12px;
+    gap: 12px;
+    padding-left: 6px;
+    padding-right: 3px;
+}
+
+html[lang="ru"] .foundryDetailsComponentPricePrice {
+    gap: 2px;
+    font-size: 14px;
+}
+
+html[lang="ru"] .foundryDetailsComponentPriceIcon {
+    width: 17px;
+    height: 17px;
+}

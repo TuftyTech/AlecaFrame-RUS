@@ -55,10 +55,19 @@ function mockScript({ relic = 'rewards', storage = {} }) {
     const MARKET = ${JSON.stringify(MARKET)};
     const listing = (platimun, specialValue, i) => ({ platimun, specialValue, playerName: 'Tenno' + i, tradeAmount: 1, amount: 1 });
     const later = (fn, ms) => setTimeout(fn, ms);
+    // Like AlecaFrame's plugin: "Platinum" sorts by the prices it already has, largest first by default.
+    const sorted = (filter) => {
+      const f = JSON.parse(filter);
+      if (f.order !== 'platPrice') return INVENTORY;
+      const dir = f.orderLargerToSmaller ? -1 : 1;
+      return INVENTORY.slice().sort((a, b) => dir * ((a.sellPrice || 0) - (b.sellPrice || 0)));
+    };
+    window.__AFRU_LOOKUPS__ = [];
     window.__AFRU_MOCK__ = {
       plugin: {
-        getFilteredInventory: (filter, all, cb) => later(() => cb(true, JSON.stringify(INVENTORY), '1 435', '96'), 30),
+        getFilteredInventory: (filter, all, cb) => later(() => cb(true, JSON.stringify(sorted(filter)), '1 435', '96'), 30),
         GetBuySellWindowData: (name, cb) => later(() => {
+          window.__AFRU_LOOKUPS__.push(name);
           const m = MARKET[name];
           if (!m) { cb(false, 'Listing not found', '[]'); return; }
           const side = (prices, other) => prices.map((p, i) => listing(p, m.specialValue, i)).concat(m.other ? [listing(other, m.other.specialValue, 9)] : []);
@@ -103,7 +112,8 @@ async function mainWindow(theme) {
   await page.addStyleTag({ content: '#loadingScreen { display: none !important; }' });
   await page.waitForFunction(() => window.__AF_RU_EXTRAS__?.ready.setupInventory && window.__AF_RU_EXTRAS__.ready.setupSettingsTab);
   await page.locator('.menuItem[tabId="tabInventory"]').click({ force: true });
-  await page.evaluate(() => window.inventoryApp.refresh());
+  // Ordered by platinum (largest first), as in the bug report.
+  await page.selectOption('#inventoryOrdering', 'platPrice');
   await page.waitForFunction(() => window.inventoryApp.items.length > 0);
   await page.waitForTimeout(400);
   await shot(page, `${theme}-inventory`);
@@ -114,14 +124,42 @@ async function mainWindow(theme) {
   await page.waitForFunction(() => document.getElementById('afruPriceRefresh').dataset.state !== 'running', null, { timeout: 30000 });
   await page.waitForTimeout(300);
   await shot(page, `${theme}-inventory-refreshed`);
-  const prices = await page.evaluate(() => window.inventoryApp.items.map((i) => `${i.name}: ${i.sellPrice}/${i.buyPrice}`));
+  const prices = await page.evaluate(() => [...document.querySelectorAll('#inventoryObjectContainer > .inventoryObject')].map((card, i) => {
+    const item = window.inventoryApp.items[i];
+    return `${card.querySelector('.inventoryItemName').textContent.trim()} (${item.name}): ${item.sellPrice}/${item.buyPrice}`;
+  }));
   const chip = await page.evaluate(() => { const c = document.getElementById('afruPriceRefresh'); return `${c.textContent.trim()} — ${c.title}`; });
+
+  // «Продам» on the first card: AlecaFrame reads the card's name back and must get the English one.
+  await page.evaluate(() => { window.__AFRU_LOOKUPS__.length = 0; });
+  // The cards are re-rendered right after a refresh, so a click can land on a replaced card;
+  // click again until AlecaFrame asks for the listing. page.waitForFunction stalls once the WTS
+  // panel opens; plain polling does not.
+  let lookup;
+  for (let clicks = 0; !lookup && clicks < 3; clicks++) {
+    await page.locator('#inventoryObjectContainer > .inventoryObject').first().locator('.inventoryItemButtonPostSell').click({ force: true });
+    for (let tries = 0; !lookup && tries < 15; tries++) {
+      await page.waitForTimeout(100);
+      lookup = await page.evaluate(() => window.__AFRU_LOOKUPS__[0]);
+    }
+  }
+  await page.waitForTimeout(400);
+  await shot(page, `${theme}-inventory-wts`);
+  const firstCard = await page.evaluate(() => document.querySelector('#inventoryObjectContainer .inventoryItemName').textContent.trim());
 
   await page.evaluate(() => window.settingsApp.open());
   await page.waitForTimeout(300);
   await page.click('[tabid="afruSettingsTab"]');
   await page.waitForTimeout(200);
   await shot(page, `${theme}-settings`);
+  // Side menu tabs: hide two of them and look at the menu.
+  await page.locator('.afru-tabList').scrollIntoViewIfNeeded();
+  for (const id of ['proAnalyticsTab', 'tabStats']) await page.locator(`#afruTab-${id}`).uncheck({ force: true });
+  await page.waitForTimeout(200);
+  await shot(page, `${theme}-settings-tabs`);
+  const visibleTabs = await page.evaluate(() => [...document.querySelectorAll('.topMenuGroup > .menuItem')]
+    .filter((m) => getComputedStyle(m).display !== 'none').map((m) => m.getAttribute('tabid')));
+  for (const id of ['proAnalyticsTab', 'tabStats']) await page.locator(`#afruTab-${id}`).check({ force: true });
   await page.click('[tabid="generalSettingsTab"]');
   await page.waitForTimeout(200);
   await shot(page, `${theme}-settings-general`);
@@ -131,6 +169,8 @@ async function mainWindow(theme) {
   await shot(page, `${theme}-foundry`);
 
   report.push(`## main.html, theme=${theme} (page errors: ${errors.length})`, `  chip: ${chip}`, ...prices.map((p) => `  ${p}`));
+  report.push(`  «Продам» on «${firstCard}» looked up: ${lookup}`);
+  report.push(`  side menu with Analytics and Stats unchecked: ${visibleTabs.join(', ')}`);
   report.push(...errors.map((e) => `  page error: ${e.split('\n')[0]}`));
   await ctx.close();
 }
