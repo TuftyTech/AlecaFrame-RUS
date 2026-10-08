@@ -1,0 +1,8 @@
+/* AlecaFrame-RU: layout fixes for longer Russian labels.
+   Only spacing/sizing, scoped to html[lang="ru"]; colors and themes are not touched.
+   Each rule comes from tools/preview.mjs overflow report. */
+
+/* Stats → trade history filters: the 357px panel squeezed "Продажа/Покупка/Сделка". */
+html[lang="ru"] .statsFilterTypeHolder .topSetting.stats {
+    padding-right: 4px;
+}

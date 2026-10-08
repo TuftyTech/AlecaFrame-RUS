@@ -1,0 +1,5 @@
+# Windows-скрипты хранятся как есть (CRLF + BOM): так их читают cmd и PowerShell 5.1,
+# в том числе после «Download ZIP».
+*.cmd -text
+*.ps1 -text
+*.psm1 -text

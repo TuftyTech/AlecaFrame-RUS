@@ -1,0 +1,4 @@
+node_modules/
+preview-out/
+# Файлы AlecaFrame не коммитим: это чужой код
+vendor/

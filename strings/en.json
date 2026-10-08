@@ -1,0 +1,7489 @@
+{
+  "alecaframeVersion": "2.6.90",
+  "strings": {
+    "\"Custom Menu Scale\" value:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "({0} needed)": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "(Optional)": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "(Rank {0})": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "{0} (Veiled)": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "{0} / {1} XP": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "{0} owned": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "{0} Relic": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "{0}-pack": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "{0}damage": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "{0}px": {
+      "files": [
+        "AFBuilds.html",
+        "assets/js/main/modals.js",
+        "main.html"
+      ],
+      "types": [
+        "js",
+        "vue"
+      ]
+    },
+    "*Subscribing through Overwolf gives you the perks of the first Patreon tier (Themes, no ads and beta access)": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "% of parts owned": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "% of prime unlocks": {
+      "files": [
+        "assets/js/main/mainFoundry.js",
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "+ Add guest": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "+{0} XP": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    ">= 10 copies": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    ">1 owned": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "1. Join the AlecaFrame Patreon": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "2. Link your Patreon account": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "30 days": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "5 new items found": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "50 results shown. Use different filters or click": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "7 days": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "90 days": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "A special thanks to the Patreon 'AlecaFrame Enjoyer' supporters for making AlecaFrame possible: Sainan, Skunk616, uSouLz, 哦 哇, StaggyBaby, Shawn Dozier, Vanitas0292, Andrew Barnett, Namielle, Magic Man and Gibonalke.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Abilities": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Account data:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Add at least one enemy to see the damage comparison": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Add new row": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Add sniper config": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Add to Sniper:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Added 'favorite' icons to the relic overlay.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added 'set' entry to remaining weapons in the foundry details dialog": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a helminth tracker to the foundry (With its respective filter)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a new setting to prevent AlecaFrame from moving itself automatically to a secondary monitor on startup": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a new window to help users fix common scaling issues": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a search bar to find listings for any item in WFMarket": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a tracker for the current Circuit rotation.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added a WFMarket icon next to each riven to indicate whether a contract already exists. Suggested by @stevens": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added current void fissures (with customizable notifications) and reset timers": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added more detailed error messages when posting rivens to WFMarket": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added more error messages for WFMarket": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for faction emotes in the inventory tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for in-app changelogs (Like this one :D)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for K-Drives and Amps in the foundry (modular tab)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for more Baro Ki'Teer items": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for pet imprints in the inventory tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added support for scenes and landing craft parts": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added the \"Favorite\" filter to the foundry": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added the \"Used for crafting\" filter to the foundry": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Added WFMarket message notifications": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Adorned": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AFBuilds": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Alchemy": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame": {
+      "files": [
+        "main.html",
+        "main_parts/stats.html",
+        "relicOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame can also automatically mark WFMarket listings as sold whenever you trade an item.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame has a lot of features, lets explore them together!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame is a third party app and is not affiliated with Digital Extremes.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame just updated to version {0}!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame Notification": {
+      "files": [
+        "InGameNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame recently had issues detecting the rewards from a relic. These are some things you can try to fix it:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AlecaFrame relic": {
+      "files": [
+        "relicOverlay.html",
+        "relicRecommendation.html",
+        "rivenOverlay.html",
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "All": {
+      "files": [
+        "assets/js/main/mainFoundry.js",
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "assets/js/public/builds.js",
+        "assets/js/squadmaking/shared.js",
+        "main_parts/relicPlanner.html",
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "All items mastered/owned": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "All parts": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "All rewards owned": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Amalgam": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Amber stars:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Amount": {
+      "files": [
+        "main_parts/inventory.html",
+        "main_parts/proAnalytics.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "An error has occurred or you have no recorded stats.": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Analyzing your relics might take some time depending on the size of your inventory.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "And we are done here, just make sure that the connection to the game is working to get the most out of the app!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Any": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "AOE": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Apply themes to overlays": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Arbitration": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Arcane levels": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Arcanes": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Arch": {
+      "files": [
+        "assets/js/main/mainFoundry.js",
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Archon": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Archon shards in a Warframe are now shown in the foundry. Implemented by @atomeistee": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Assault": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Attack type:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Attribute": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Attribute price and popularity:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Auction": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Auto": {
+      "files": [
+        "main.html",
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Autodetect": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Automatically move AlecaFrame to a secondary monitor on startup": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Average": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Average riven price": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Avg:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Awesome!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Axi": {
+      "files": [
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Aya": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Aya is now also tracked in the stats tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Aya:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Back": {
+      "files": [
+        "SquadMakingMain.html",
+        "main.html",
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Background 1": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Background 2": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Background 3": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Bad": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Banned": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Baro Ki'Teer will arrive soon": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Base": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Base armor:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Base energy:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Base health:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Base shield:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Basic": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Best attributes:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Best bad attrs:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Best to upgrade - Ducats": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Best to upgrade - Platinum": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Best ways to level up mastery:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Beta": {
+      "files": [
+        "SquadMakingMain.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Block user": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Blocked players": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Blocking angle:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Blueprints needed:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Bounties": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Build Simulator": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "button to refresh it": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Buy": {
+      "files": [
+        "assets/js/main/modals.js",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "BUY": {
+      "files": [
+        "main.html",
+        "main_parts/deltaViewer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Buy - Active": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Buy - Hover": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Buy from WFMarket": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Buyout price:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "CAMBION": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Can be crafted": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Capture": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Card": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Card - Active": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Card - Hover": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Casual": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ceres": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "CETUS": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Change": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Change order": {
+      "files": [
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/rivenExplorer.html",
+        "main_parts/stats.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Change your filters or make sure that the connection to the game is working properly.": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Changed rivens to use the new 'x1.15' system in faction damage attributes": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Changelog:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Chart disabled in this link": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Check for updates": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Check the FAQ in our": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Click again to confirm": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Close": {
+      "files": [
+        "SquadMakingMain.html",
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Close anyway": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Cold:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Combo duration:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Come back whenever the connection to the game is working properly": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Come back whenever you have something to sell or check that the connection to the game is working properly": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Coming soon": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Community themes": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Companion": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Companions:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "complete": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Complete (Sets)": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Components": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Connecting to the matchmaking servers...": {
+      "files": [
+        "SquadMakingMain.html",
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Connecting...": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Connection checklist:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Contains archon shards": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Continue later": {
+      "files": [
+        "main_parts/deltaViewer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Copy my API token": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Copy relic reward data to clipboard when a relic is opened": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Copy to clipboard": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Copy your Warframe UI scaling settings to AlecaFrame:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Corpus": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Corrupted": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Crafted": {
+      "files": [
+        "relicOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Crafting tree": {
+      "files": [
+        "main.html",
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Crafting trees! Rendering implemented by @f4nat1c": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Create a {0} squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Create a squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Create public link": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Create squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Credits": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Credits:": {
+      "files": [
+        "assets/js/main/modals.js",
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html",
+        "js-html"
+      ]
+    },
+    "Crit %:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Crit mult:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ctr+Tab": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Custom": {
+      "files": [
+        "assets/js/squadmaking/shared.js",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Cyan stars:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Daily resets (Standing caps, SP alerts,...):": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Daily sortie:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Daily sorties": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Daily trades": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Damage mitigation:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Damage source:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Data export & API": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Date": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Day:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Days played": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "dd MMM yyyy": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Default": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Defense": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "DEMO mode enabled": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "DEMO mode is enabled. Please disable it in the settings tab to access the market": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Description (Optional):": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Details": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Direct": {
+      "files": [
+        "AFBuilds.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Direct sale": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Disconnected from the server.": {
+      "files": [
+        "assets/js/squadmaking/squad.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Disconnected from the server. Trying to reconnect...": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Discord": {
+      "files": [
+        "SquadMakingMain.html",
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Discord webhook URL:": {
+      "files": [
+        "main_parts/rivenExplorer.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Disposition": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Disruption": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Do you want AlecaFrame to remember the 'Auto' mode setting when restarted?": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Don't show \"remember Auto status\" window when changing 'Auto' mode": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Don't show again": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Download AlecaFrame": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Drain:": {
+      "files": [
+        "main.html",
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Drop locations:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ducanator": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ducats": {
+      "files": [
+        "assets/js/public/stats.js",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Ducats profit": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ducats vs void traces efficiency (To radiant)": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Ducats:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ducats/Platinum": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Duration:": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Duviri": {
+      "files": [
+        "assets/js/public/builds.js",
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Duviri:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "E. profits:": {
+      "files": [
+        "relicRecommendation.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Each squad shows what its purpose is, the reputation of its leader and the requirements/goals of the squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Earth": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "EARTH": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Easy": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Edit contract": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Edit enemies": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Email:": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Empty to disable": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Enable 'Stats' tab": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enable notification sounds": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enable relic recommendations overlay": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enable relic rewards overlay": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enable riven overlays": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enable trade finished detection/overlay": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Endo": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Endo:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enemy setup": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enemy setup editor": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enemy setup too easy": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enemy setup too hard": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enough mastery": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Enter a name for the config": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Enter a WFMarket riven ID or URL here": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Enter message here (optional)": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Equipped (Mods only)": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Eris": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Error: {0}": {
+      "files": [
+        "assets/js/main/mainBase.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Europa": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Exc.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Excavation": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Exceptional": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/modals.js",
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr",
+        "html",
+        "js"
+      ]
+    },
+    "Expected profits for the selected squad size.": {
+      "files": [
+        "assets/js/main/mainRelicPlanner.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Expected value:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Expenses": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Export all my data:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Export as theme file": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Export data as CSV": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Export data as JSON": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Export to desktop": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Extermin.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Extra capacity:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Failed to block player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to connect to the matchmaking servers.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Failed to connect to the TennoFinder servers.": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Failed to download the latest game data.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Failed to get mod browser update: {0}": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to join squad. This squad is probably full or doesn't exist anymore": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to remove player review": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to report player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to review player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Failed to unblock player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "FAQ": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Farming": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fass:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Favorite": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Finder": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Finish": {
+      "files": [
+        "SquadMakingMain.html",
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Fire rate:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Fix all missing items": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Fixed a few bugs related to parts being built in the Foundry": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed an issue with component ownership for weapons made of other weapons": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed max mod levels in Railjack mods": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed some negative attributes showing a grade opposite than expected": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed some non-tradeable parts appearing in the inventory sets tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed some scroll bars appearing when not needed": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed the \"New items\" notification not working on some accounts. Reported by @leeryway": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed the name of some components where its prefix would appear twice": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed the picture of some weapon components (such as stocks)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fixed wrong Shedu Chassis icon": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Fla.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Flawless": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/modals.js",
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr",
+        "html",
+        "js"
+      ]
+    },
+    "For more information about the stats API, please check the FAQ channel on Discord": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Foundry": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "From relics": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Full (Best)": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Game content": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Game NPCs": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "General": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Generate link": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Generate token": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Generating import string. This might take a few seconds...": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Generating link, please wait...": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "GET": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Get sharing link": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Get your own stats": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Give reputation to user": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Go back": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Go!": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Good": {
+      "files": [
+        "SquadMakingMain.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Grand bosses": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Great": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Grineer": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Guest by {0}": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Harrow chassis:": {
+      "files": [
+        "main_parts/deltaViewer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Heavy cast time:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Helminth done": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Help/About": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "here": {
+      "files": [
+        "AFBuilds.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Hide completed:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Hide Founders Program items (Excalibur Prime, Skana Prime and Lato Prime)": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Hive": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "How perfect the random component for each stat is": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "I confirm that my report is relevant and thruthful": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "I have read and agree to these rules": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Icons": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Icons on BG": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "If after following this checklist you are still having issues, feel free to ask for help on": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If it still doesn't work, try entering/leaving a relay 4-5 times": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If the opposite happens, you can block that user from joining your squads or send a report if they were breaking the rules": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If the relic recommendation overlay fails to detect the relic type it will now automatically close.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "If this is marked with an X, it means that your Overwolf install is corrupt. ONLY if marked with a X, please reinstall Overwolf or ask for help on Discord.": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "If you are joining a squad, first make sure that you meet the requirements and have enough resources (relics,...) to complete the goals": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you click on a relic, you can also see detailed information such as drop locations and customized reward probabilities.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you click on any Warframe or Weapon in the foundry, you can see more details and where each component can be obtained.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you close AlecaFrame, the relic overlay won't show up.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you connect your WFMarket account, you can create listings with 1 click!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you had a good time with other players, you can increase their reputation with the + button.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you have a friend that isn't using AlecaFrame, you can add them as a Guest if there is a slot available": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you have changed any in-game settings recently, please restart the game before autodetecting": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "If you login to WFMarket with steam, please add an email/password to your WFMarket account (": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you meet someone your don't like, you can always block them from joining your squads. You should only report someone if they are breaking the rules listed here or their behaviour is clearly making everyone's experience worse.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "If you think this is a mistake or you want to appeal it, please do it on": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Import from clipboard": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Import to Riven.market": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Improve OCR response time significantly": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Improved the looks of the mods section in the inventory tab.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "In Riven.Market": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "In the next tab, you can check your rivens, see how perfect they are and create listings with 1 click!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "In WFMarket": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "in WFMarket:": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "In-Game": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Incarnon": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Incarnon genesis": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Include levels that need formas in the Mastery Helper": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Infested": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Int.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Intact": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/modals.js",
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr",
+        "html",
+        "js"
+      ]
+    },
+    "Intercep.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Intrinsics": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Inventory": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Invite command copied to clipboard.": {
+      "files": [
+        "assets/js/squadmaking/squad.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Item": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Item crafted": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Item details": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Item in the foundry": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Item owned/mastered": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Items will be automatically marked as sold in WFMarket when a sale is completed. You can also +rep or report a user there.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Items/relics to farm:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Join squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Junctions:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Jupiter": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Kitgun": {
+      "files": [
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Kuva Fort.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Large": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Last upgrade:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Legacy (ONLY <=1080p)": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Level": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Level:": {
+      "files": [
+        "AFBuilds.html",
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Leveled up (Mods & Arcanes)": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lich": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Lich type:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Link": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Link account": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "List on Riven.Market:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "List on WFMarket": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "List on WFMarket:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lith": {
+      "files": [
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Load build": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Loading game data...": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Loading relics...": {
+      "files": [
+        "assets/js/main/mainRelicPlanner.js",
+        "assets/js/relicRecommendation/main.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Loading void fissures...": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Log in": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Log out": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Login into": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lowest price:": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lowest WFMarket price:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lua": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Lvl:": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Made with ❤️ in 🇪🇸 🇪🇺. © 2021-2026 Alejandro Cabrerizo. All rights reserved": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mag. size/Ammo:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Magnificent": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Make sure the game is running and you are logged into your game account": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Make sure the Warframe overlay is enabled. Open the Overwolf settings menu, then go to Overlay & Hotkeys and finally make sure Warframe is enabled. You WILL NEED TO RESTART THE GAME after you change this.": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Make sure you are not starting Steam/Launcher/Game as an admin.": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Mandatory": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Marked as favorite": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "marked as sold": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mars": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mastered": {
+      "files": [
+        "assets/js/main/mainFoundry.js",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Mastery": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mastery helper": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Max squad size:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Max:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Max. time:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Maximum crafting time if you don't paralelize blueprint construction.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Medium": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Melee": {
+      "files": [
+        "assets/js/main/mainFoundry.js",
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Meso": {
+      "files": [
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Message copied!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Message template (accepts Discord pings):": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Message too long!": {
+      "files": [
+        "assets/js/squadmaking/squad.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Min similar %:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Min:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Min. MR:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Min. reputation:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Min. time:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Minimum platinum": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Minimum similarity %:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Minimum time it would take by paralelize blueprint construction.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Minutes ahead of world cycle change to send the notifications:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Misc": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "main_parts/inventory.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Missing": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Missing information": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Missing items": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Missing items (Best for MR)": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Missing items detected. Click here to remove them": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "MMM": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Mobile Def.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mod": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Mod browser": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mod leveled up": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Mod levels": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Mod type:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mode:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Modifiers:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Mods": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Modular": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "More details are currently not supported for this item": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "More info": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "MR:": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "MR: {0}": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Murmur": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "My contracts": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "My orders": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Name": {
+      "files": [
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/rivenExplorer.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Narmer": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Navigation": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Navigation - Active": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Navigation - Hover": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Neo": {
+      "files": [
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Neptune": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Never": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New 'Mastery helper' tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New 'Riven Finder' tab. Detailed riven info, good rolls and find your dream riven in the market": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New 'Riven Sniper' tab. Get notified whenever a riven your want is listed online": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New <:warframe:771543444178337792> WFMarket message: **": {
+      "files": [
+        "assets/js/main/mainBase.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "New build": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "New in-game conversation from **": {
+      "files": [
+        "assets/js/main/mainBase.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "New items": {
+      "files": [
+        "main_parts/deltaViewer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "New main window layout": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New overlay for chat rivens (Only English supported)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New overlay for riven rerolling (Only English supported)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New tab: TennoFinder (Squads). Find squads to open relics, kill bosses and many other things way faster than using the in-game chat!": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New Trading Analytics tab (Premium only)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New visuals in the relic overlay to show the set price. Implemented by @f4nat1c": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "New Warframe conversation notifications:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Next": {
+      "files": [
+        "SquadMakingMain.html",
+        "main.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Next rotation in:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Night:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No": {
+      "files": [
+        "assets/js/public/stats.js",
+        "main.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "No ads, more features and support the development!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No blueprints missing": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No components were found for this item": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No crafting tree found for this item": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No drops were found for this item": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No extra requirements": {
+      "files": [
+        "SquadMakingMain.html",
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No ideas were found 😔. Try using other filters.": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No relics could be found in your inventory": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No resources missing": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No rivens were found with those filters": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No similar rivens found": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No sniper configurations found": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No spam or advertising in squad titles or chat messages": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No squads found": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No WFMarket contracts were found with those filters": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "No WFMarket orders were found with those filters": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "None": {
+      "files": [
+        "assets/js/sharedOverwolfStuff.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Normal": {
+      "files": [
+        "main.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Normal:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Not crafted": {
+      "files": [
+        "relicOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Not currently available": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Notifications": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "NSFW, racial slurs, propaganda, politics, harassment, racism, discrimination, and other offensive behaviors are not allowed in squad titles and chat messages": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Offline": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "OK": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "OK!": {
+      "files": [
+        "assets/js/main/mainBase.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Omnia": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "On the left you can see a list of all squads that are looking for members.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "On the right side you can see your current reputation and account status. If your reputation gets too low or are reported for breaking the rules, your account might get banned from using TennoFinder": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Once you join a squad, you can use the chat to talk to the other members": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Once you open a relic in-game or need to choose a relic, you will see an overlay with useful information to help you make the best choice.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Online": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Only 100 results are shown. Try using different filters or click": {
+      "files": [
+        "AFBuilds.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Only 50 trades are shown. Try using different filters or click": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Only owned": {
+      "files": [
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Only send message notifications when Warframe is in the background": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Open themes folder": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Opening requiem relics won't trigger the relic rewards overlay anymore.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Optimized": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Optional": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "or": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Order first": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Order placed": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Order type": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Orokin": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Other": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Output items:": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Overlay not enabled": {
+      "files": [
+        "assets/js/tradeFinishedNotification/main.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Overlays": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Overwolf": {
+      "files": [
+        "assets/js/sharedOverwolfStuff.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Owned": {
+      "files": [
+        "main.html",
+        "main_parts/foundry.html",
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "OWOWOWOWOWWOWO": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Part or relic name": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Part type": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Parts": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Passive:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Password:": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Personal token copied to clipboard. Please be careful with it!": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Phobos": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Pistol": {
+      "files": [
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Platinum": {
+      "files": [
+        "assets/js/public/stats.js",
+        "main_parts/inventory.html",
+        "main_parts/stats.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Platinum profit": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Platinum vs void traces efficiency (To radiant)": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Platinum:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Player blocked. You can unblock them from the 'Blocked players' list": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Player reported successfully": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Player review removed": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Player reviewed": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Player unblocked successfully.": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Player username:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Please check your internet connection or ask for help on": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Please come back later or click": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Please login or have your Warframe data recognized at least once to see your account information here": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Please select a weapon first": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Please try again later or check Discord for updates": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Pluto": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Polarities:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "positive review": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Positive review": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "POST BUY": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "POST SELL": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Premium": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Premium features are only available to Patreon T2+ supporters": {
+      "files": [
+        "main_parts/proAnalytics.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Preset:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Press": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Press Ctrl + Tab to interact with the overlay": {
+      "files": [
+        "relicRecommendation.html",
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Price:": {
+      "files": [
+        "main.html",
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Primary": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Prime": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Prime resurgence": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Prime Resurgence": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Private": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Profit": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Profit:": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Public": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Purchase": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Purchases": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Push your current filters to the overlay.": {
+      "files": [
+        "assets/js/main/mainRelicPlanner.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Rad.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Radiant": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/modals.js",
+        "main.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "attr",
+        "html",
+        "js"
+      ]
+    },
+    "Railjack:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Range": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Range:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rank:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rarity:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Ready to build": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reason:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Recent players": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Recommended relics": {
+      "files": [
+        "relicRecommendation.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Recommended. Nothing too serious, just respect the requirements and have fun.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reduced relic overlay size when subscribed. (Ad space removed completelly)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Release channel:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Relic overview": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Relic planner": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Relic refinement tier:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Relic tier": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Relics": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "assets/js/squadmaking/shared.js",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Relics allowed:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Relics opened": {
+      "files": [
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Relics:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reload everything": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reload time:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remember that you are responsible for their actions, and you can also be reported for any rules your guests break": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remember WFM 'Auto' status when AlecaFrame is restarted": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remove ads and support the developement": {
+      "files": [
+        "AFBuilds.html",
+        "SquadMakingMain.html",
+        "SquadMakingSquad.html",
+        "main.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remove all contracts": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remove all orders": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Remove positive review": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Removed Parallax Blueprint from the Parallax set. Suggested by @Scholar_Andrew": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Report a user": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Report user": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Reports must be truthful and should contain enough information to make a decision on the case (screenshots, chat logs,...)": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reputation:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Req.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Req. negative:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Required": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Required MR": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Requirements (optional):": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Requirements:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Rerolls": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rerolls:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rescue": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Reset timers": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Resources needed:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Results": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Revealed": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Revenue": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rifle": {
+      "files": [
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Riven details": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Riven disposition:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Riven grade": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Riven.Market": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rivens": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Room title:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Rules": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Run speed:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sabotage": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sale": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sales": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sanctuary": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Sanctuary type:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Saturn": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Save build": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Save preset": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Scaling issues detected in the relic overlay": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Search": {
+      "files": [
+        "AFBuilds.html",
+        "SquadMakingMain.html",
+        "main.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/rivenExplorer.html",
+        "main_parts/stats.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Secondary": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Sedna": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "See which relics can drop a blueprint when hovering over a part in the foundry": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Select a component to see more information here": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Select a mod slot to see the damage comparison": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Select a weapon": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Select an item in your inventory to see its WFMarket listings here": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Select the purpose of this squad:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sell": {
+      "files": [
+        "assets/js/main/modals.js",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "SELL": {
+      "files": [
+        "main.html",
+        "main_parts/deltaViewer.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sell - Active": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Sell - Hover": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Selling price:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Send {0}": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Send notifications through Discord": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Send notifications through Windows": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Send report": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sentient": {
+      "files": [
+        "assets/js/public/builds.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "server or ask for help there": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Set all contracts invisible": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Set all contracts visible": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Set all orders invisible": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Set all orders visible": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Set complete": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sets": {
+      "files": [
+        "assets/js/main/warframeMarket/ordersAndContracts.js",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "Settings": {
+      "files": [
+        "AFBuilds.html",
+        "main.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Setup:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sharing": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Shot type:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Shotgun": {
+      "files": [
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Show account ducats and platinum on relic overlay": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Show all items by default in the Foundry, Inventory and Relic tabs": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Show warning when trying to close the main app window": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sign up": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Similar rivens:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html",
+        "main_parts/rivenExplorer.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Slots used:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Small": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sniper": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Sniper settings:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Some weapon parts (Ambassador) weren't recongized in the sets tab": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Sometimes it is neccessary to complete a few missions before Overwolf detects the game": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Sortie": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Speed:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Spy": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Squad chat:": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Squad is full": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Squad members:": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Squad size:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Squad type:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Squad:": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Squads should be, by default, hosted in English. Similar to 1), this doesn't apply if all members are ok with something else": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Star chart": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Start now": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Starting price:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Stat perfectness": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Stats": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Status": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Status %:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Status effects:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Status:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Steel p. junctions:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Steel path": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Steel Path": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Steel path:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Subscribe": {
+      "files": [
+        "SquadMakingMain.html",
+        "SquadMakingSquad.html",
+        "main_parts/proAnalytics.html",
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Subscribe through Overwolf": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Subscribe to get more config slots": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Subscribe to see exact prices for each attribute": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Subsumed": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Subsumed into the Helminth System": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Support the development": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Support the development of AlecaFrame": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Survival": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Tab": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Tab - Active": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Tab - Hover": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Take mod rank into account for the WFM 'missing items' check": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TennoFinder - In squad": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TennoFinder - Squad search": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TennoFinder is probably down for maintenance, but if this error continues for a while, please ask for help on": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TennoFinder might be down for maintenance or an unexpected error occurred.": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TennoFinder rules and ToS": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Text": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Text on BG": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The Circuit": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The current filters will now be used in the overlay": {
+      "files": [
+        "assets/js/main/mainRelicPlanner.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The final tab shows your current WFMarket listings, allows you to quickly edit or remove then and even to automatically remove/fix the ones where you don't own the items anymore.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The first tab is the Foundry, where you can check your overall progress in the game and what you need to complete everything else.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The following items will be": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The host has disbanded this squad": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The next tab is the Inventory, where you can see all the tradeable items in your inventory and their average price.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The relic planner now shows all relic tiers in the same slot. Suggested by @Scholar_Andrew and @WalfHero": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The relic reward overlay should now adapt better to weird scale/resolution combinations": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The spaced reserved for an ad will now be hidden if the user is subscribed": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The squad list hasn't been updated for a long time. Please use the": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The stats tab is disabled.": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The themes folder will open soon": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "The Warframe overlay needs to be enabled in Overwolf settings": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "The WFMarket panel will now show a 'Connecting...' overlay if WFMarket is having issues": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Theme applied!": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Theme author:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Theme customization": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Theme name:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Themes": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Themes are only available to supporters": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "There are many filters filters available. You can try the name of a Warframe, weapon, a part, 'Any Lith', 'Radiant',...": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "There are many filters filters available. You can try the name of any resource, including minerals, endo, ...": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "This item can't be traded": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "This relic seems to be vaulted": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "This slot is empty": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "This squad focused on speed and efficiency.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "This tab is called the \"Relic planner\", where you can easily check which relic is the most profitable or recommended for you.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Timeframe:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Timer and Relic notifications:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Timers & Events": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Tip:": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "to interact with the overlay": {
+      "files": [
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "to show all of them.": {
+      "files": [
+        "AFBuilds.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "to show everything.": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "to try again.": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Top trading partners": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Top Warframe.Market items (last 7 days)": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total": {
+      "files": [
+        "main.html",
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total expenses:": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total from 0:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total of current selection": {
+      "files": [
+        "assets/js/main/mainInventory.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Total revenue:": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total value": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total:": {
+      "files": [
+        "main_parts/deltaViewer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Total: {0}": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trade": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TRADE": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trade history": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trade history is disabled in this link": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trade history is only available if the game language is set to English": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trade with": {
+      "files": [
+        "tradeFinishedNotification.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trades:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Trading Analytics": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Troubleshoot": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Try again": {
+      "files": [
+        "main.html",
+        "rivenOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Try using borderless mode instead of fullscreen": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Try using different filters or create your own squad": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "TTK (Time To Kill):": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Type": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Type:": {
+      "files": [
+        "SquadMakingMain.html",
+        "main.html",
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Unblock user": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "attr"
+      ]
+    },
+    "Unit price": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Units:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "UNKNOWN error": {
+      "files": [
+        "assets/js/relicOverlay/main.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Unless agreed otherwise, your main focus while on the squad should be to complete the objectives. It is highly recommended that you set yourself to 'Offline' in WFMarket to avoid slowing down the other players of the squad.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Unmastered": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Unrevealed": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Unvaulted": {
+      "files": [
+        "main.html",
+        "main_parts/deltaViewer.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "vue"
+      ]
+    },
+    "Unveiled stash": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Updated data is available": {
+      "files": [
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Uranus": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Use <PLAYER_NAME> as the placeholder for the Warframe username": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Use <WFM_MESSAGE> as the placeholder for the WFMarket message content": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Use Ctrl+TAB to interact with the overlay": {
+      "files": [
+        "relicOverlay.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Use lvl. 8 stats": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Used for crafting": {
+      "files": [
+        "main_parts/foundry.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Used for crafting:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "User": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Username": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Using old data": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "VALLIS": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Value": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js",
+        "assets/js/public/stats.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Vault status": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/mainRelicPlanner.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Vaulted": {
+      "files": [
+        "main.html",
+        "main_parts/deltaViewer.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "Veiled stash": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Venus": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Version **{0}** changelog:": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Version:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Visibility:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Void": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Void Casc.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Void fissures": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Void Flood": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Volume (Day)": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Vome:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "VRC Relics": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Warframe": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Warframe \"Menu Scale\" settings:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe connection not ready": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Warframe connection troubleshooter": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe is open and you are logged in": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe Market": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe needs to be opened after Overwolf": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe needs to be started AFTER Overwolf/AlecaFrame": {
+      "files": [
+        "assets/js/main/modals.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "Warframe should NOT run as admin": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe.Market is down/very slow": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframe.Market message notifications:": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warframes / Archwings:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Warm:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WARNING: This might make the app slugish on slow computers": {
+      "files": [
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Weapon": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Weapon:": {
+      "files": [
+        "main_parts/rivenDetailsModal.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Weapons:": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Weekly resets (Archons, Circuit, Traders,...):": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Welcome to AlecaFrame": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Welcome to AlecaFrame!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Welcome to TennoFinder": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Welcome to TennoFinder!": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WF connection not ready, using old data.": {
+      "files": [
+        "assets/js/main/mainFoundry.js"
+      ],
+      "types": [
+        "js-html"
+      ]
+    },
+    "WF data not ready": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WF data OK!": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WFM": {
+      "files": [
+        "assets/js/main/rivenExplorer/general.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "WFMarket": {
+      "files": [
+        "main.html",
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WFMarket order placed": {
+      "files": [
+        "assets/js/main/mainInventory.js",
+        "assets/js/main/mainRelicPlanner.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "WFMarket riven lookup:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WFMarket search:": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "When creating your own squad, you can choose the goals and requirements of your squad.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "When you join a squad, you are responsible for making sure you can complete the tasks listed in the title/requirements. Multiple offences will result in a ban. If you are close to meeting the requirements, it is allowed to join the squad and ask in the chat if everyone is ok with your situation.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Which bounties do you want to farm:": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Why are you reporting this user? (English only):": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Wiki link": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Wiki Link": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Wiki/Docs": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "With platinum": {
+      "files": [
+        "main_parts/masteryHelper.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Wow! It seems like everything is working now.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WTB": {
+      "files": [
+        "main.html",
+        "main_parts/inventory.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "WTB:": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "WTS": {
+      "files": [
+        "main.html",
+        "main_parts/inventory.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "vue"
+      ]
+    },
+    "WTS:": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Yes": {
+      "files": [
+        "assets/js/public/stats.js",
+        "main.html",
+        "main_parts/foundry.html",
+        "main_parts/inventory.html",
+        "main_parts/relicPlanner.html",
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html",
+        "js"
+      ]
+    },
+    "You can (optionally) specify any required Warframes for the mission": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can also disable this window in the settings menu": {
+      "files": [
+        "assets/js/tradeFinishedNotification/main.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can also specify a minimum length (specially useful for The Circuit) and/or any required Warframes": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can also specify a minimum length and/or any required Warframes": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can create custom configurations in the 'Finder' tab": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You CAN DISABLE IT in the settings menu if you prefer to do it manually.": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You can enable it in the settings menu and then click": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You can filter the available squads by searching for any term (title, goals,...) or you can also create your own one": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You can now change the zoom level of the main window.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can now fav relics": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can now see all relics (including not owned) in the relic planner.": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can now see mods that you don't own in the inventory tab. Suggested by @Why Wholesuhm?": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can now support AlecaFrame in Patreon and get new exclusive perks!": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can only create/join 1 squad at the same time!": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can only join 1 squad at the same time": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You can select which boss you want to kill and (optionally) if any special Warframe is required": {
+      "files": [
+        "assets/js/squadmaking/shared.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You have been kicked from this squad": {
+      "files": [
+        "SquadMakingSquad.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You login data is only used once and won't be stored": {
+      "files": [
+        "main_parts/warframeMarket.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "You need to accept the terms before reporting a player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "You need to write a reason for reporting the player": {
+      "files": [
+        "assets/js/squadmaking/squadfinder.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Your account is currently banned from using TennoFinder.": {
+      "files": [
+        "SquadMakingMain.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your inventory seems empty.": {
+      "files": [
+        "main_parts/foundry.html",
+        "main_parts/inventory.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your notification slots:": {
+      "files": [
+        "main_parts/rivenExplorer.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your overwolf install is OK": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your personal stats:": {
+      "files": [
+        "main_parts/stats.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your rivens (and attributes) are now given a grade depending on how good they are. (Based on @44bananas excelent work)": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Your Trade history stats": {
+      "files": [
+        "main_parts/proAnalytics.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Your Warframe scaling settings can now be detected automatically": {
+      "files": [
+        "assets/js/main/changelog.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Zariman": {
+      "files": [
+        "main.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
+    "Zaw": {
+      "files": [
+        "assets/js/main/rivenExplorer/unveiled.js",
+        "assets/js/main/rivenExplorer/veiled.js",
+        "assets/js/main/warframeMarket/ordersAndContracts.js"
+      ],
+      "types": [
+        "js"
+      ]
+    },
+    "Zoom:": {
+      "files": [
+        "AFBuilds.html"
+      ],
+      "types": [
+        "html"
+      ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "alecaframe-ru",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Русский интерфейс для AlecaFrame: перевод интерфейса и установщик для Windows (без изменения рекламы, подписки и функций)",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "extract": "node tools/extract.mjs",
+    "coverage": "node tools/coverage.mjs",
+    "build": "node tools/build.mjs",
+    "test": "node --test test/*.test.mjs",
+    "preview": "node tools/preview.mjs",
+    "test:windows": "pwsh -NoProfile -File test/windows.tests.ps1"
+  },
+  "devDependencies": {
+    "acorn": "^8.19.0",
+    "acorn-walk": "^8.3.5",
+    "jsdom": "^30.1.2",
+    "playwright-core": "^1.64.0",
+    "vue": "3.2.31"
+  }
+}
