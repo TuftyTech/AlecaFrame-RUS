@@ -4,6 +4,8 @@ import path from 'node:path';
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const DICT_MARKER = '/*__AF_RU_DICT__*/ { exact: {}, patterns: {} }';
 const CSS_MARKER = "/*__AF_RU_CSS__*/ ''";
+const EXTRAS_CSS_MARKER = "/*__AF_RU_EXTRAS_CSS__*/ ''";
+const EXTRAS_CSS_FILES = ['extras.css', 'theme-graphite.css'];
 const placeholders = (s) => (s.match(/\{\d+\}/g) ?? []).sort().join(',');
 
 /** Merges locales/<lang>/*.json into { exact, patterns } and reports problems. */
@@ -35,11 +37,17 @@ export function loadLocale(lang = 'ru', dir = path.join(ROOT, 'locales', lang)) 
   return { exact, patterns, errors, origin };
 }
 
+/** Localizer (dictionary + layout CSS) followed by the optional features from src/extras.js. */
 export function bundle(dict, version = 'dev', css = '') {
   const src = fs.readFileSync(path.join(ROOT, 'src', 'localizer.js'), 'utf8');
   if (!src.includes(DICT_MARKER) || !src.includes(CSS_MARKER)) throw new Error('markers not found in src/localizer.js');
   const payload = JSON.stringify({ version, exact: dict.exact, patterns: dict.patterns });
-  return src.replace(DICT_MARKER, () => payload).replace(CSS_MARKER, () => JSON.stringify(css));
+  const localizer = src.replace(DICT_MARKER, () => payload).replace(CSS_MARKER, () => JSON.stringify(css));
+
+  const extras = fs.readFileSync(path.join(ROOT, 'src', 'extras.js'), 'utf8');
+  if (!extras.includes(EXTRAS_CSS_MARKER)) throw new Error('marker not found in src/extras.js');
+  const extrasCss = EXTRAS_CSS_FILES.map((f) => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n');
+  return localizer + '\n' + extras.replace(EXTRAS_CSS_MARKER, () => JSON.stringify(extrasCss));
 }
 
 export function readCss() {

@@ -24,5 +24,16 @@
   "Trade with": "Сделка с",
   "Overlay not enabled": "Оверлей не включён",
   "You can also disable this window in the settings menu": "Это окно можно отключить в настройках",
-  "positive review": "положительный отзыв"
+  "positive review": "положительный отзыв",
+  "// Ошибки окна наград реликвии: приходят из AlecaFrameClientLib.dll, в strings/en.json их нет": "",
+  "Unsupported Warframe language detected. For the time being, only English, French, Spanish and German are supported.": "Язык Warframe не поддерживается: AlecaFrame распознаёт награды только на английском, французском, испанском и немецком. Чтобы окно реликвии работало, переключите язык игры, например на английский.",
+  "Couldn't get relic data in time": "Не удалось вовремя распознать награды реликвии",
+  "Requiem relics are not supported yet": "Реликвии Реквиема пока не поддерживаются",
+  "Requiem relics are not supported": "Реликвии Реквиема не поддерживаются",
+  "Could not find any rewards. Please make sure your WARFRAME SCALING SETTINGS are up to date in AlecaFrame or ask for help in Discord.": "Награды не найдены. Проверьте, что в настройках AlecaFrame указан тот же МАСШТАБ МЕНЮ, что и в Warframe, или спросите в Discord.",
+  "Please make sure your WARFRAME SCALING SETTINGS are up to date in AlecaFrame or check FAQ T9 in our Discord for more help.": "Проверьте, что в настройках AlecaFrame указан тот же МАСШТАБ МЕНЮ, что и в Warframe. Подробнее — FAQ T9 в Discord AlecaFrame.",
+  "An unknown error was detected (NWD)": "Неизвестная ошибка (NWD)",
+  "An error has ocurred on GetRelicWindowData: {0}": "Ошибка при получении данных реликвии: {0}",
+  "A general error has ocurred when doing relic work: {0}": "Ошибка при обработке реликвии: {0}",
+  "An general error has ocurred when doing relic work: {0}": "Ошибка при обработке реликвии: {0}"
 }

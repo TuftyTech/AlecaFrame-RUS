@@ -1,6 +1,6 @@
 {
   "name": "alecaframe-ru",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Русский интерфейс для AlecaFrame: перевод интерфейса и установщик для Windows (без изменения рекламы, подписки и функций)",
   "type": "module",
@@ -11,6 +11,7 @@
     "build": "node tools/build.mjs",
     "test": "node --test test/*.test.mjs",
     "preview": "node tools/preview.mjs",
+    "preview:features": "node tools/preview-features.mjs",
     "test:windows": "pwsh -NoProfile -File test/windows.tests.ps1"
   },
   "devDependencies": {

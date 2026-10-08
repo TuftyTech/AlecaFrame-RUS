@@ -31,7 +31,8 @@ function Confirm-Consent {
     Write-Host '      не только AlecaFrame. Без этого Overwolf закрыл бы изменённый AlecaFrame.'
     Write-Host '   4. Когда вы выйдете из Overwolf, все файлы вернутся в исходное состояние.'
     Write-Host ''
-    Write-Host '  Реклама, подписка и платные функции не затрагиваются.'
+    Write-Host '  Подписка и платные функции не затрагиваются. Реклама остаётся как есть, пока вы сами'
+    Write-Host '  не свернёте её блок: Настройки -> AlecaFrame-RU.'
     Write-Host ''
     $answer = Read-Host '  Продолжить? (да / нет)'
     if ($answer.Trim() -notmatch '^(да|д|y|yes)$') {

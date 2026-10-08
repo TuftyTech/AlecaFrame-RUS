@@ -1,0 +1,165 @@
+/* AlecaFrame-RU: controls added by extras.js. Colors come from AlecaFrame's own variables,
+   so they follow the default theme, AlecaFrame themes and «Графит» alike. */
+
+/* Inventory → «Обновить цены». Same pill as AlecaFrame's .topSetting, but always expanded. */
+.afru-chip {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 14px 4px 9px;
+    border-radius: 16px;
+    overflow: hidden;
+    font-size: 15px;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    color: var(--color-text);
+    background-color: var(--color-card);
+    transition: background-color 0.15s linear;
+}
+
+.afru-chip:hover {
+    background-color: var(--color-card-hover);
+}
+
+.afru-chip:focus-visible {
+    outline: 2px solid var(--color-tab-lighter);
+    outline-offset: 2px;
+}
+
+.afru-chipIcon {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    background: url('assets/img/platinum.png') center / contain no-repeat;
+}
+
+.afru-chipMeta {
+    font-size: 13px;
+    color: var(--color-navigation-hover);
+    font-variant-numeric: tabular-nums;
+}
+
+.afru-chipMeta:empty {
+    display: none;
+}
+
+.afru-chip[data-state="error"] .afru-chipMeta {
+    color: #ff8282;
+}
+
+.afru-chipProgress {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 3px;
+    background-color: var(--color-tab-lighter);
+    transition: width 0.2s linear;
+}
+
+.afru-chip[data-state="running"] .afru-chipProgress {
+    width: var(--afru-progress, 0%);
+}
+
+.afru-chip[data-state="running"] .afru-chipIcon {
+    animation: afru-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes afru-pulse {
+    50% { opacity: 0.4; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .afru-chip[data-state="running"] .afru-chipIcon { animation: none; }
+}
+
+/* A card whose price came from warframe.market during the last hour. */
+.inventoryObject[data-afru-fresh]::after {
+    content: "";
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4fd18b;
+    box-shadow: 0 0 0 3px var(--color-card);
+    pointer-events: none;
+}
+
+/* Settings → «Сворачивать рекламный блок»: the block shrinks to its Patreon line and the
+   timers panel takes the freed space, in the side column and in the bottom row alike. */
+.afru-adExpand {
+    display: none;
+}
+
+html[data-afru-ads="collapsed"] .staticRightColumn {
+    flex-direction: column;
+}
+
+html[data-afru-ads="collapsed"] .adCointainerWithSubscribe {
+    flex-direction: row;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
+    padding: 5px 6px 5px 12px;
+}
+
+html[data-afru-ads="collapsed"] #mainAD {
+    display: none;
+}
+
+html[data-afru-ads="collapsed"] .adCointainerWithSubscribe .subscribeButton {
+    flex-grow: 1;
+    min-width: 0;
+    gap: 8px;
+}
+
+html[data-afru-ads="collapsed"] .subscribeButton .subscriberIcon,
+html[data-afru-ads="collapsed"] .subscribeButton .patreonBigIcon {
+    flex-shrink: 0;
+}
+
+/* AlecaFrame sizes every <button> as a 30px square icon. */
+html[data-afru-ads="collapsed"] .afru-adExpand {
+    display: block;
+    flex-shrink: 0;
+    width: auto;
+    height: auto;
+    white-space: nowrap;
+    padding: 3px 12px;
+    border: none;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--color-text);
+    background-color: var(--color-card);
+    cursor: pointer;
+    transition: background-color 0.15s linear;
+}
+
+.afru-adExpand:hover {
+    background-color: var(--color-card-hover);
+}
+
+.afru-adExpand:focus-visible {
+    outline: 2px solid var(--color-tab-lighter);
+    outline-offset: 2px;
+}
+
+/* Settings → AlecaFrame-RU */
+#afruSettingsTab .settingsCheckBoxHolder .settingsSelect {
+    margin-left: 10px;
+}
+
+#afruSettingsTab .buttonSettingsTest {
+    margin: 0;
+}
+
+.afru-settingsStatus {
+    margin-left: 12px;
+    font-size: 14px;
+    color: var(--color-navigation-hover);
+}

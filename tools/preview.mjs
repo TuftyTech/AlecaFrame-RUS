@@ -3,66 +3,26 @@
 // elements whose text overflows only in Russian.
 // Usage: node tools/preview.mjs <AlecaFrame dir> [outDir]
 import fs from 'node:fs';
-import http from 'node:http';
 import path from 'node:path';
 import { chromium } from 'playwright-core';
+import { CHROME, OVERWOLF_STUB, collectOverflows, serveStatic, webDirOf } from './harness.mjs';
 
 const appDir = path.resolve(process.argv[2] ?? 'vendor/AlecaFrame');
-const webDir = fs.existsSync(path.join(appDir, 'web')) ? path.join(appDir, 'web') : appDir;
 const outDir = path.resolve(process.argv[3] ?? 'preview-out');
 const bundlePath = path.resolve('dist/alecaframe-ru.js');
 fs.mkdirSync(outDir, { recursive: true });
 
-const MIME = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf', '.json': 'application/json' };
-const server = http.createServer((req, res) => {
-  const file = path.join(webDir, decodeURIComponent(new URL(req.url, 'http://x').pathname));
-  if (!file.startsWith(webDir)) { res.writeHead(403).end(); return; }
-  fs.readFile(file, (err, data) => {
-    if (err) { res.writeHead(404).end(); return; }
-    res.writeHead(200, { 'content-type': MIME[path.extname(file)] ?? 'application/octet-stream' }).end(data);
-  });
-});
-await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const base = `http://127.0.0.1:${server.address().port}`;
-
-// Every overwolf.* access returns a callable no-op; callbacks never fire, so
-// the UI renders its empty/loading state, which is enough to check labels.
-const STUB = `(() => {
-  const h = { get: (t, k) => (k === 'then' ? undefined : k === Symbol.toPrimitive ? () => '' : P), apply: () => P, construct: () => P };
-  const P = new Proxy(function () {}, h);
-  window.overwolf = P;
-})();`;
+const server = await serveStatic(webDirOf(appDir));
+const { base } = server;
 
 const TABS = ['tabFoundry', 'tabMasteryHelper', 'tabInventory', 'tabRelicPlanner', 'tabRivenExplorer', 'tabWarframeMarket', 'proAnalyticsTab', 'tabStats', 'tabAbout'];
 
-function collectOverflows() {
-  const out = [];
-  const cssPath = (el) => {
-    const parts = [];
-    for (let e = el; e && e.nodeType === 1 && parts.length < 6; e = e.parentElement) {
-      if (e.id) { parts.unshift('#' + e.id); break; }
-      const cls = [...e.classList].slice(0, 2).join('.');
-      const idx = e.parentElement ? [...e.parentElement.children].indexOf(e) : 0;
-      parts.unshift(e.tagName.toLowerCase() + (cls ? '.' + cls : '') + `:nth-child(${idx + 1})`);
-    }
-    return parts.join(' > ');
-  };
-  for (const el of document.querySelectorAll('body *')) {
-    if (!el.getClientRects().length || !el.clientWidth) continue;
-    const ownText = [...el.childNodes].filter((n) => n.nodeType === 3).map((n) => n.nodeValue).join('').trim();
-    if (!/[A-Za-zА-Яа-яЁё]{2}/.test(ownText)) continue;
-    const clipsY = getComputedStyle(el).overflowY !== 'visible' && el.scrollHeight > el.clientHeight + 2;
-    if (el.scrollWidth > el.clientWidth + 2 || clipsY) out.push({ path: cssPath(el), text: ownText.slice(0, 80), over: Math.max(el.scrollWidth - el.clientWidth, el.scrollHeight - el.clientHeight) });
-  }
-  return out;
-}
-
-const browser = await chromium.launch({ executablePath: process.env.CHROME ?? '/usr/local/bin/google-chrome', args: ['--no-sandbox'] });
+const browser = await chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
 const results = {};
 for (const lang of ['en', 'ru']) {
   const ctx = await browser.newContext({ viewport: { width: 1770, height: 800 } });
   await ctx.route('**/*', (route) => (route.request().url().startsWith(base) ? route.continue() : route.abort()));
-  await ctx.addInitScript(STUB);
+  await ctx.addInitScript(OVERWOLF_STUB);
   if (lang === 'ru') await ctx.addInitScript({ path: bundlePath });
   const page = await ctx.newPage();
   const errors = [];
