@@ -1,0 +1,45 @@
+name: 🔤 Перевод
+description: английский текст, опечатка или термин не как в игре
+labels:
+  - translation
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        каждая такая заявка делает перевод лучше 🤍
+
+        psst, в консоли AlecaFrame (F12 в окне Overwolf) команда `window.__AF_RU__.missing()` покажет все тексты, которые встретились без перевода. её вывод очень пригодится ниже
+  - type: dropdown
+    id: kind
+    attributes:
+      label: что не так
+      options:
+        - текст остался на английском
+        - перевод неточный или не как в русской версии Warframe
+        - текст обрезается или не помещается
+        - название предмета
+    validations:
+      required: true
+  - type: input
+    id: alecaframe
+    attributes:
+      label: версия AlecaFrame
+      placeholder: 2.6.90
+    validations:
+      required: true
+  - type: textarea
+    id: where
+    attributes:
+      label: где и какой текст
+      description: вкладка или окно, исходный текст и, если знаете, как правильно
+      placeholder: |
+        Литейная, подсказка над кнопкой: «Show only craftable»
+        в игре это «Только доступные для создания»
+    validations:
+      required: true
+  - type: textarea
+    id: media
+    attributes:
+      label: скриншот
+      description: перетащите сюда, так быстрее найти место

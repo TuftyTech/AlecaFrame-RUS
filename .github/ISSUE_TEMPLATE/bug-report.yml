@@ -1,0 +1,76 @@
+name: 🐛 Ошибка
+description: что-то сломалось, не запускается или ведёт себя странно
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        спасибо, что нашли время 🤍
+
+        psst, больше всего помогает `launcher.log`: вставьте `%LOCALAPPDATA%\AlecaFrame-RU\launcher.log` в адресную строку Проводника и перетащите файл в поле ниже
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: перед началом
+      options:
+        - label: я поискал(а) в [существующих issues](https://github.com/TuftyTech/AlecaFrame-RUS/issues?q=is%3Aissue) (и закрытых тоже), такого ещё нет
+          required: true
+        - label: у меня последняя [версия AlecaFrame-RUS](https://github.com/TuftyTech/AlecaFrame-RUS/releases/latest)
+          required: true
+  - type: input
+    id: version
+    attributes:
+      label: версия AlecaFrame-RUS
+      description: |
+        видна в «Параметры → Приложения → AlecaFrame-RUS» или в package.json архива
+        пожалуйста, НЕ пишите «последняя», она меняется с каждым релизом
+      placeholder: 0.5.0
+    validations:
+      required: true
+  - type: input
+    id: alecaframe
+    attributes:
+      label: версии AlecaFrame и Overwolf
+      description: установка пишет их строкой «AlecaFrame 2.6.90, Overwolf 0.310.1.1»
+      placeholder: AlecaFrame 2.6.90, Overwolf 0.310.1.1
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: где это происходит
+      options:
+        - установка или удаление
+        - AlecaFrame остаётся на английском
+        - Overwolf перезапускается или закрывает AlecaFrame
+        - поиск на русском
+        - вкладка «Где фармить»
+        - окно наград реликвии
+        - «Обновить цены» в инвентаре
+        - реклама, вкладки, тема
+        - другое
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: что случилось
+      description: что вы сделали, что ожидали и что получилось вместо этого
+      placeholder: |
+        1. открыл(а) ...
+        2. нажал(а) ...
+        3. увидел(а) ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: launcher.log и скриншоты
+      description: перетащите файлы сюда
+  - type: input
+    id: windows
+    attributes:
+      label: windows
+      placeholder: Windows 11 23H2

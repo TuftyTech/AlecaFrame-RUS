@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔥 Популярные issues
+    url: https://github.com/TuftyTech/AlecaFrame-RUS/issues?q=is%3Aissue%20state%3Aopen%20sort%3Areactions-%2B1-desc
+    about: открытые issues с больше всего 👍, возможно ваш уже там. 👍 весит больше нового issue
+  - name: 📦 Последняя версия
+    url: https://github.com/TuftyTech/AlecaFrame-RUS/releases/latest
+    about: проверьте, что у вас свежий AlecaFrame-RUS.zip, многое уже исправлено
+  - name: 🔒 Сообщить об уязвимости
+    url: https://github.com/TuftyTech/AlecaFrame-RUS/security/advisories/new
+    about: проблемы безопасности сюда, приватно, никогда в публичный issue

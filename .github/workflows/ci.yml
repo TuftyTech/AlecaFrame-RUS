@@ -1,0 +1,60 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# ни один job не наследует права по умолчанию
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node:
+    name: перевод, поиск, дополнения
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      # каждый uses пинится по commit SHA, а не по подвижному тегу
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413 # v6.1.0
+        with:
+          version: 12.3.4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      # тест сверяет dist/ со сборкой: «Source code (zip)» должен работать без pnpm build
+      - name: pnpm test
+        run: pnpm test
+
+      - name: в описании нет длинного тире
+        run: |
+          if grep -n '—' README.md README.en.md .github/release-notes.md; then
+            echo "::error::длинное тире в описании"; exit 1
+          fi
+
+  windows:
+    name: установщик (${{ matrix.shell }})
+    runs-on: windows-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        # powershell = Windows PowerShell 5.1, его запускает Install.cmd у игроков
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: test/windows.tests.ps1
+        shell: cmd
+        run: ${{ matrix.shell }} -NoProfile -ExecutionPolicy Bypass -File test\windows.tests.ps1

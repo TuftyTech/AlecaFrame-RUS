@@ -1,0 +1,30 @@
+name: ❓ Вопрос
+description: маленький вопросик / это только у меня так или..
+labels:
+  - question
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        возможно, ответ уже есть в [README](https://github.com/TuftyTech/AlecaFrame-RUS#readme) (раздел «Если что-то пошло не так»), если нет, спрашивайте 🤍
+  - type: textarea
+    id: question
+    attributes:
+      label: вопрос
+    validations:
+      required: true
+  - type: dropdown
+    id: about
+    attributes:
+      label: это про
+      options:
+        - установку и обновление
+        - безопасность и флаги Overwolf
+        - как пользоваться функцией
+        - другое
+  - type: textarea
+    id: media
+    attributes:
+      label: скриншоты / журнал
+      description: если помогает объяснить

@@ -1,0 +1,43 @@
+name: 💡 Идея
+description: есть мысль, как сделать AlecaFrame удобнее? выкладывайте
+labels:
+  - enhancement
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ооо идея 👀 рассказывайте всё
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: перед началом
+      options:
+        - label: я поискал(а) в [существующих issues](https://github.com/TuftyTech/AlecaFrame-RUS/issues?q=is%3Aissue) (и закрытых тоже), такого ещё не предлагали
+          required: true
+        - label: это не платная функция AlecaFrame (их проект не включает и не будет)
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: что мешает
+      description: проблема за идеей, если она есть
+      placeholder: каждый раз, когда открываю реликвию, приходится ...
+  - type: textarea
+    id: idea
+    attributes:
+      label: ваша идея
+      description: что должен делать AlecaFrame-RUS? наброски и скриншоты очень приветствуются
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: о какой части
+      options:
+        - перевод и поиск
+        - «Где фармить», реликвии и разрывы
+        - цены и окно наград
+        - реклама, вкладки, тема
+        - установка
+        - другое
