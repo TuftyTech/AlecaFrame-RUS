@@ -5,7 +5,7 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const DICT_MARKER = '/*__AF_RU_DICT__*/ { exact: {}, patterns: {} }';
 const CSS_MARKER = "/*__AF_RU_CSS__*/ ''";
 const EXTRAS_CSS_MARKER = "/*__AF_RU_EXTRAS_CSS__*/ ''";
-const EXTRAS_CSS_FILES = ['extras.css', 'theme-graphite.css'];
+const EXTRAS_CSS_FILES = ['extras.css', 'farm.css', 'theme-graphite.css'];
 const placeholders = (s) => (s.match(/\{\d+\}/g) ?? []).sort().join(',');
 
 /*
@@ -52,17 +52,33 @@ export function loadLocale(lang = 'ru', dir = path.join(ROOT, 'locales', lang)) 
   return { exact, patterns, scopes: Object.values(scopes), errors, origin };
 }
 
-/** Localizer (dictionary + layout CSS) followed by the optional features from src/extras.js. */
+export const ITEMS_FILE = '90-items.json';
+
+/** Splits item names (locales/<lang>/90-items.json) from interface strings: search needs them apart. */
+export function splitItems(dict) {
+  const exact = {};
+  const items = { ...(dict.items ?? {}) };
+  for (const [key, value] of Object.entries(dict.exact ?? {})) {
+    if (dict.origin?.[key] === ITEMS_FILE) items[key] = value;
+    else exact[key] = value;
+  }
+  return { exact, items };
+}
+
+/** Localizer (dictionary + layout CSS), Russian search, then the optional features from src/extras.js. */
 export function bundle(dict, version = 'dev', css = '', { texts = false } = {}) {
   const src = fs.readFileSync(path.join(ROOT, 'src', 'localizer.js'), 'utf8');
   if (!src.includes(DICT_MARKER) || !src.includes(CSS_MARKER)) throw new Error('markers not found in src/localizer.js');
-  const payload = JSON.stringify({ version, texts, exact: dict.exact, patterns: dict.patterns, scopes: dict.scopes ?? [] });
-  const localizer = src.replace(DICT_MARKER, () => payload).replace(CSS_MARKER, () => JSON.stringify(css));
+  const { exact, items } = splitItems(dict);
+  // JSON.parse of a string literal starts much faster than an equally large object literal.
+  const payload = JSON.stringify({ version, texts, exact, items, patterns: dict.patterns, scopes: dict.scopes ?? [] });
+  const localizer = src.replace(DICT_MARKER, () => `JSON.parse(${JSON.stringify(payload)})`).replace(CSS_MARKER, () => JSON.stringify(css));
 
-  const extras = fs.readFileSync(path.join(ROOT, 'src', 'extras.js'), 'utf8');
+  const read = (f) => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8');
+  const extras = read('extras.js');
   if (!extras.includes(EXTRAS_CSS_MARKER)) throw new Error('marker not found in src/extras.js');
-  const extrasCss = EXTRAS_CSS_FILES.map((f) => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n');
-  return localizer + '\n' + extras.replace(EXTRAS_CSS_MARKER, () => JSON.stringify(extrasCss));
+  const extrasCss = EXTRAS_CSS_FILES.map(read).join('\n');
+  return [localizer, read('search.js'), extras.replace(EXTRAS_CSS_MARKER, () => JSON.stringify(extrasCss)), read('farm.js')].join('\n');
 }
 
 export const TEXTS_FILE = path.join(ROOT, 'locales', 'ru', 'texts', 'descriptions.json');
@@ -83,7 +99,7 @@ export function loadTexts(file = TEXTS_FILE) {
 export function bundleTexts(texts) {
   // JSON.parse of a string literal is much faster to start than an equally large object literal.
   const data = JSON.stringify(JSON.stringify(texts));
-  return `/* AlecaFrame-RU: описания предметов (официальная локализация Warframe). */\n` +
+  return `/* AlecaFrame-RUS: описания предметов (официальная локализация Warframe). */\n` +
     `(function (r) { if (r && r.addDictionary) r.addDictionary(JSON.parse(${data})); })(window.__AF_RU__);\n`;
 }
 

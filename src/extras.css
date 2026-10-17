@@ -1,4 +1,4 @@
-/* AlecaFrame-RU: controls added by extras.js. Colors come from AlecaFrame's own variables,
+/* AlecaFrame-RUS: controls added by extras.js. Colors come from AlecaFrame's own variables,
    so they follow the default theme, AlecaFrame themes and «Графит» alike. */
 
 /* Inventory → «Обновить цены». Same pill as AlecaFrame's .topSetting, but always expanded. */
@@ -149,7 +149,7 @@ html[data-afru-ads="collapsed"] .afru-adExpand {
     outline-offset: 2px;
 }
 
-/* Settings → AlecaFrame-RU */
+/* Settings → AlecaFrame-RUS */
 #afruSettingsTab .settingsCheckBoxHolder .settingsSelect {
     margin-left: 10px;
 }

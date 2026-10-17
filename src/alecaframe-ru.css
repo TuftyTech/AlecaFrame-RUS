@@ -1,4 +1,4 @@
-/* AlecaFrame-RU: layout fixes for longer Russian labels.
+/* AlecaFrame-RUS: layout fixes for longer Russian labels.
    Only spacing/sizing, scoped to html[lang="ru"]; colors and themes are not touched.
    Each rule comes from tools/preview.mjs overflow report. */
 

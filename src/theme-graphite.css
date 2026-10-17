@@ -1,5 +1,5 @@
-/* AlecaFrame-RU: тема «Графит» — нейтральная тёмная, без синевы и фиолетового.
-   Active only while html[data-afru-theme="graphite"] is set (Settings → AlecaFrame-RU).
+/* AlecaFrame-RUS: тема «Графит» — нейтральная тёмная, без синевы и фиолетового.
+   Active only while html[data-afru-theme="graphite"] is set (Settings → AlecaFrame-RUS).
    Variables are !important so the theme also wins over the colors that AlecaFrame's
    own theme editor writes inline on :root. Ad slots are left as they are. */
 html[data-afru-theme="graphite"] {

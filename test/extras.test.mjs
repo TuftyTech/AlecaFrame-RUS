@@ -290,7 +290,7 @@ const SETTINGS = `
     <div class="mainTabBody"><div id="generalSettingsTab" class="settingsTab shown"></div></div>
   </div>`;
 
-test('settings: AlecaFrame-RU tab switches the theme for this and other windows', async () => {
+test('settings: AlecaFrame-RUS tab switches the theme for this and other windows', async () => {
   const { win, doc } = open('main.html', SETTINGS);
   win.settingsApp = {};
   await waitFor(() => doc.getElementById('afruSettingsTab'), 'settings tab');

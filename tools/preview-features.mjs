@@ -1,4 +1,4 @@
-// Shows AlecaFrame-RU's own features on the real AlecaFrame pages with mock game data
+// Shows AlecaFrame-RUS's own features on the real AlecaFrame pages with mock game data
 // in headless Chrome: the inventory price refresh, the settings tab, the «Графит» theme
 // and the relic reward overlay (rewards, live prices, unknown prices, unsupported language).
 // Usage: node tools/preview-features.mjs <AlecaFrame dir> [outDir]
@@ -94,7 +94,11 @@ const report = [];
 
 async function openPage(file, { viewport, russian = true, ...mock }) {
   const ctx = await browser.newContext({ viewport });
-  await ctx.route('**/*', (route) => (route.request().url().startsWith(server.base) ? route.continue() : route.abort()));
+  // The «Где фармить» tab reads real drop tables and fissures; everything else stays offline.
+  await ctx.route('**/*', (route) => {
+    const url = route.request().url();
+    return url.startsWith(server.base) || url.startsWith('https://api.warframestat.us/') ? route.continue() : route.abort();
+  });
   await ctx.addInitScript(mockScript(mock));
   await ctx.addInitScript(OVERWOLF_STUB);
   if (russian) await ctx.addInitScript({ path: bundlePath });
@@ -175,9 +179,35 @@ async function mainWindow(theme) {
   await ctx.close();
 }
 
-async function relicOverlay(name, { russian = true, theme = 'default', live = true, relic = 'rewards' } = {}) {
+async function farmTab(theme) {
+  const { ctx, page, errors } = await openPage('main.html', { viewport: { width: 1600, height: 900 }, storage: { 'afru.theme': theme } });
+  await page.addStyleTag({ content: '#loadingScreen { display: none !important; }' });
+  await page.waitForFunction(() => document.querySelector('.menuItem[tabid="afruTabFarm"]'));
+  await page.locator('.menuItem[tabid="afruTabFarm"]').click({ force: true });
+  await page.waitForFunction(() => document.querySelector('.afru-fissureGroups'), null, { timeout: 20000 });
+  await page.waitForTimeout(300);
+  await shot(page, `${theme}-farm`);
+  await page.fill('#afruFarmSearch', 'нова прайм каркас');
+  await page.waitForFunction(() => document.querySelectorAll('#afruFarmSuggestions .afru-suggestion').length > 0);
+  await shot(page, `${theme}-farm-suggestions`);
+  const suggestions = await page.evaluate(() => [...document.querySelectorAll('#afruFarmSuggestions .afru-suggestion')].slice(0, 4).map((s) => s.textContent));
+  await page.locator('#afruFarmSuggestions .afru-suggestion').first().click({ force: true });
+  await page.waitForFunction(() => document.querySelector('.afru-farmDetails .afru-table'), null, { timeout: 20000 });
+  await page.waitForTimeout(500);
+  await shot(page, `${theme}-farm-item`);
+  await page.locator('.afru-farmDetails .afru-link').first().click();
+  await page.waitForFunction(() => /Где добыть/.test(document.querySelector('.afru-farmDetails')?.textContent || ''), null, { timeout: 20000 });
+  await page.waitForTimeout(500);
+  await shot(page, `${theme}-farm-relic`);
+  const relic = await page.evaluate(() => document.querySelector('.afru-farmDetails .afru-farmTitle')?.textContent);
+  report.push(`## farm, theme=${theme} (page errors: ${errors.length})`, `  suggestions: ${suggestions.join(' | ')}`, `  relic: ${relic}`);
+  report.push(...errors.map((e) => `  page error: ${e.split('\n')[0]}`));
+  await ctx.close();
+}
+
+async function relicOverlay(name, { russian = true, theme = 'default', live = true, relic = 'rewards', storage: extra = {} } = {}) {
   // 1920x1080 game with ads shown: AlecaFrame sizes the window to 1420x355.
-  const storage = { 'afru.theme': theme, 'afru.relicLivePrices': String(live) };
+  const storage = { 'afru.theme': theme, 'afru.relicLivePrices': String(live), ...extra };
   const { ctx, page, errors } = await openPage('relicOverlay.html', { viewport: { width: 1420, height: 355 }, russian, relic, storage });
   await page.waitForFunction(() => window.relicsApp && !window.relicsApp.loading);
   await page.waitForTimeout(live ? 1200 : 300);
@@ -206,6 +236,8 @@ await relicOverlay('ru-unknown', { live: false, relic: 'unknown' });
 await relicOverlay('en-original-language', { russian: false, live: false, relic: 'language' });
 await relicOverlay('ru-language', { live: false, relic: 'language' });
 await relicOverlay('ru-graphite-live', { theme: 'graphite' });
+await relicOverlay('ru-graphite-noads', { theme: 'graphite', live: false, storage: { 'afru.hideOverlayAds': 'true' } });
+await farmTab('graphite');
 
 await browser.close();
 server.close();

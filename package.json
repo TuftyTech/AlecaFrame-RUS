@@ -1,10 +1,17 @@
 {
-  "name": "alecaframe-ru",
-  "version": "0.4.0",
+  "name": "alecaframe-rus",
+  "version": "0.5.0",
   "private": true,
-  "description": "Русский интерфейс для AlecaFrame: перевод интерфейса и установщик для Windows (без изменения рекламы, подписки и функций)",
+  "description": "Русификатор AlecaFrame для Warframe: перевод, поиск на русском, вкладка «Где фармить» и мгновенные цены warframe.market",
   "type": "module",
   "license": "MIT",
+  "author": "TuftyTech",
+  "homepage": "https://github.com/TuftyTech/AlecaFrame-RUS#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TuftyTech/AlecaFrame-RUS.git"
+  },
+  "bugs": "https://github.com/TuftyTech/AlecaFrame-RUS/issues",
   "scripts": {
     "extract": "node tools/extract.mjs",
     "coverage": "node tools/coverage.mjs",

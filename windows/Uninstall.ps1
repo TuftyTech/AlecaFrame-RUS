@@ -1,4 +1,4 @@
-﻿# Полное удаление AlecaFrame-RU: агент, ярлыки, запись в «Приложениях», исходные файлы AlecaFrame.
+﻿# Полное удаление AlecaFrame-RUS: агент, ярлыки, запись в «Приложениях», исходные файлы AlecaFrame.
 # Запускается из Uninstall.cmd и из «Параметры -> Приложения» (оттуда с -Pause).
 param([switch]$Pause)
 $ErrorActionPreference = 'Stop'
@@ -42,7 +42,7 @@ try {
         Start-Process -FilePath $overwolf.Overwolf
         Write-Host '  Overwolf запущен заново, как обычно.'
     }
-    Write-Host '  Готово: AlecaFrame-RU удалён. AlecaFrame работает как обычно, на английском.' -ForegroundColor Green
+    Write-Host '  Готово: AlecaFrame-RUS удалён. AlecaFrame работает как обычно, на английском.' -ForegroundColor Green
 }
 catch {
     Write-Host "  Ошибка: $($_.Exception.Message)" -ForegroundColor Red

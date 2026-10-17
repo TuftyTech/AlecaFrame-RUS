@@ -1,4 +1,4 @@
-﻿# Установка AlecaFrame-RU один раз. Дальше всё делает фоновый агент (windows\Agent.ps1):
+﻿# Установка AlecaFrame-RUS один раз. Дальше всё делает фоновый агент (windows\Agent.ps1):
 # AlecaFrame открывается на русском и после перезагрузки Windows, и после обновлений AlecaFrame.
 param([switch]$NoDesktop)
 $ErrorActionPreference = 'Stop'
@@ -16,19 +16,19 @@ function Confirm-Consent {
     if (Test-Path -LiteralPath $paths.Consent) { return }
     Write-Host ''
     Write-Host '  Что сделает установка:'
-    Write-Host "   1. Скопирует AlecaFrame-RU в $($paths.App)"
+    Write-Host "   1. Скопирует AlecaFrame-RUS в $($paths.App)"
     Write-Host '      и добавит в автозагрузку Windows маленький фоновый процесс без окна (PowerShell).'
-    Write-Host '   2. Когда запускается Overwolf, этот процесс перезапускает его с флагом, ОТКЛЮЧАЮЩИМ'
-    Write-Host '      проверку целостности файлов приложений (extension-validation). Это касается ВСЕХ'
-    Write-Host '      приложений Overwolf, пока AlecaFrame-RU установлен. Без этого Overwolf закроет'
-    Write-Host '      изменённый AlecaFrame. Если ваша сборка Overwolf закроет его и с этим флагом,'
-    Write-Host '      установка отдельно спросит про второй флаг (force-validation-report-only).'
+    Write-Host '   2. Когда запускается Overwolf, этот процесс перезапускает его с двумя флагами:'
+    Write-Host '      extension-validation ОТКЛЮЧАЕТ проверку целостности файлов приложений, а'
+    Write-Host '      force-validation-report-only оставляет от неё только запись в журнал Overwolf.'
+    Write-Host '      Это касается ВСЕХ приложений Overwolf, пока AlecaFrame-RUS установлен. Без этого'
+    Write-Host '      Overwolf закроет изменённый AlecaFrame (HashMismatch).'
     Write-Host '   3. В 9 страниц AlecaFrame добавляется одна строка, подключающая перевод. Когда Overwolf'
     Write-Host '      закрыт или запущен без флага, файлы возвращаются в исходный вид.'
     Write-Host '   4. Появятся ярлыки «AlecaFrame (русский)» на рабочем столе и в меню «Пуск».'
     Write-Host ''
     Write-Host '  Подписка и платные функции не затрагиваются. Удаление: Uninstall.cmd или'
-    Write-Host '  «Параметры -> Приложения -> AlecaFrame-RU». Оно возвращает все файлы AlecaFrame.'
+    Write-Host '  «Параметры -> Приложения -> AlecaFrame-RUS». Оно возвращает все файлы AlecaFrame.'
     Write-Host ''
     if (-not (Read-Yes '  Установить? (да / нет)')) {
         throw [System.OperationCanceledException]::new('Отменено, ничего не изменено.')
@@ -46,7 +46,7 @@ function Confirm-ReportOnly {
     Write-Host '  Можно запускать Overwolf с ещё одним флагом: force-validation-report-only.'
     Write-Host '  С ним Overwolf по-прежнему сверяет файлы, но о несовпадениях только пишет в свой журнал'
     Write-Host '  и не закрывает приложение. Как и первый флаг, это касается ВСЕХ приложений Overwolf,'
-    Write-Host '  пока AlecaFrame-RU установлен. Так же запускает китайский перевод DDA-007.'
+    Write-Host '  пока AlecaFrame-RUS установлен. Так же запускает китайский перевод DDA-007.'
     Write-Host ''
     $answer = if (Read-Yes '  Перезапустить Overwolf с этим флагом? Ответ запомнится. (да / нет)') { $paths.ReportOnly } else { $paths.ReportOnlyNo }
     Set-Content -LiteralPath $answer -Value (Get-Date -Format o)
@@ -87,7 +87,7 @@ function Wait-Agent([int]$TimeoutSeconds) {
 
 try {
     Write-Host ''
-    Write-Host '  AlecaFrame-RU: русский интерфейс для AlecaFrame' -ForegroundColor Cyan
+    Write-Host '  AlecaFrame-RUS: русификатор AlecaFrame' -ForegroundColor Cyan
     $localizer = Join-Path (Join-Path $sourceRoot 'dist') 'alecaframe-ru.js'
     if (-not (Test-Path -LiteralPath $localizer)) { throw "Не найден файл перевода: $localizer. Скачайте архив заново." }
     $install = Find-AfruOverwolf
@@ -108,6 +108,9 @@ try {
     foreach ($stale in $paths.Blocked, $paths.ReportOnlyNo) {
         if (Test-Path -LiteralPath $stale) { Remove-Item -LiteralPath $stale -Force }
     }
+    # Оба флага разрешены одним согласием: агент сразу запускает Overwolf с ними, без второго вопроса.
+    New-Item -ItemType Directory -Force -Path $paths.State | Out-Null
+    Set-Content -LiteralPath $paths.ReportOnly -Value (Get-Date -Format o)
     Register-AfruIntegration -Paths $paths -Version (Get-PackageVersion) -NoDesktop:$NoDesktop
     Step "Установлено в $($paths.App)"
 
@@ -131,7 +134,7 @@ try {
             Write-Host '  Выйдите из Overwolf и запустите его обычным способом, без «Запуска от имени администратора».'
         }
         default {
-            Write-Host '  AlecaFrame-RU установлен, но перевод ещё не подтвердился.' -ForegroundColor Yellow
+            Write-Host '  AlecaFrame-RUS установлен, но перевод ещё не подтвердился.' -ForegroundColor Yellow
             Write-Host '  Фоновый процесс продолжает работу: откройте AlecaFrame ярлыком «AlecaFrame (русский)».'
             Write-Host "  Если не поможет, создайте issue и приложите журнал: $($paths.Log)"
         }

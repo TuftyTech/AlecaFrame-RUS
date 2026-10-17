@@ -1,5 +1,5 @@
 /*
- * AlecaFrame-RU: runtime localizer for AlecaFrame windows.
+ * AlecaFrame-RUS: runtime localizer for AlecaFrame windows.
  * Only rewrites visible text (text nodes and a few text attributes); where AlecaFrame
  * reads a text back, it gets the original. Does not touch application logic, ads or subscription code.
  */
@@ -21,6 +21,22 @@
 
   var global = { exact: new Map(Object.entries(dict.exact || {})), patterns: compilePatterns(dict.patterns) };
   var exact = global.exact;
+  // Item names come separately so that Russian search can tell them from interface strings.
+  var itemNames = dict.items || {};
+  Object.keys(itemNames).forEach(function (k) { if (!exact.has(k)) exact.set(k, itemNames[k]); });
+
+  // Settings → AlecaFrame-RUS → «Язык интерфейса»: "ru", "en" or "auto" (the Windows language).
+  function interfaceLanguage() {
+    var choice = null;
+    try { choice = root.localStorage && root.localStorage.getItem('afru.lang'); } catch (e) { /* no storage */ }
+    if (choice === 'en' || choice === 'ru') return choice;
+    if (choice === 'auto') {
+      var nav = root.navigator || {};
+      return /^(ru|uk|be|kk)\b/i.test(String(nav.language || (nav.languages && nav.languages[0]) || 'ru')) ? 'ru' : 'en';
+    }
+    return 'ru';
+  }
+  var active = interfaceLanguage() === 'ru';
   // Words like "Burst" or "Active" are only safe to translate in one place (weapon stats), so such
   // translations apply only inside elements matching their selector, and before the global ones.
   var scopes = (dict.scopes || []).map(function (s) {
@@ -327,7 +343,7 @@
     var script = doc.createElement('script');
     script.src = ownSrc ? ownSrc.replace(/[^/?#]*([?#].*)?$/, TEXTS_FILE) : 'assets/js/' + TEXTS_FILE;
     script.async = true;
-    script.onerror = function () { try { root.console.warn('[AlecaFrame-RU] no ' + TEXTS_FILE); } catch (e) { /* no console */ } };
+    script.onerror = function () { try { root.console.warn('[AlecaFrame-RUS] no ' + TEXTS_FILE); } catch (e) { /* no console */ } };
     var parent = doc.head || doc.documentElement;
     // Injected before the page is parsed there is nowhere to put the script yet.
     if (parent) parent.appendChild(script);
@@ -343,7 +359,7 @@
     else wrapReadBack();
     translateTree(target);
     // Written to Overwolf's per-window log; the launcher waits for this line.
-    try { root.console.log('[AlecaFrame-RU] loaded v' + (dict.version || 'dev')); } catch (e) { /* no console */ }
+    try { root.console.log('[AlecaFrame-RUS] loaded v' + (dict.version || 'dev')); } catch (e) { /* no console */ }
     new root.MutationObserver(onMutations).observe(target, {
       childList: true,
       subtree: true,
@@ -353,9 +369,13 @@
     });
   }
 
-  ['alert', 'confirm', 'prompt'].forEach(wrapDialog);
   root.__AF_RU__ = {
     version: dict.version || 'dev',
+    /** false when the interface language is English: nothing is translated, the extra features stay. */
+    active: active,
+    language: active ? 'ru' : 'en',
+    /** English item name -> Russian name, for search. */
+    items: function () { return itemNames; },
     translate: translate,
     translateTree: translateTree,
     withSourceText: withSourceText,
@@ -364,6 +384,11 @@
     /** Untranslated texts seen in this window, for reporting gaps in the dictionary. */
     missing: function () { return Array.from(stats.missed.keys()).sort(); },
   };
-  start();
-  loadTexts();
+  if (active) {
+    ['alert', 'confirm', 'prompt'].forEach(wrapDialog);
+    start();
+    loadTexts();
+  } else {
+    try { root.console.log('[AlecaFrame-RUS] loaded v' + (dict.version || 'dev') + ' (English interface)'); } catch (e) { /* no console */ }
+  }
 })(typeof window !== 'undefined' ? window : null, /*__AF_RU_DICT__*/ { exact: {}, patterns: {} }, /*__AF_RU_CSS__*/ '');

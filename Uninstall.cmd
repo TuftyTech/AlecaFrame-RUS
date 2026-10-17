@@ -1,5 +1,5 @@
 @echo off
 setlocal
-title AlecaFrame-RU uninstall
+title AlecaFrame-RUS uninstall
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0windows\Uninstall.ps1" -Pause
 exit /b %ERRORLEVEL%

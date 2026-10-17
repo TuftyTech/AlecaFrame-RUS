@@ -39,7 +39,7 @@ function Join-AfruPath {
     Join-Path $Root $Child
 }
 
-# Все пути AlecaFrame-RU в одном месте. Папки Windows подставляются, только если они есть.
+# Все пути AlecaFrame-RUS в одном месте. Папки Windows подставляются, только если они есть.
 function Get-AfruPaths {
     param([string]$LocalAppData = $env:LOCALAPPDATA)
     $state = Join-Path $LocalAppData 'AlecaFrame-RU'
@@ -134,7 +134,7 @@ function Add-AfruLocalizer {
         $plan += [pscustomobject]@{ Page = $page; File = $file; Text = $text.Insert($m.Index + $m.Length, $script:Tag) }
     }
 
-    # Скрипты кладутся раньше тегов: страница не должна ссылаться на файл, которого ещё н��т.
+    # Скрипты кладутся раньше тегов: страница не должна ссылаться на файл, которого ещё нет.
     $jsDir = Join-Path (Join-Path $web 'assets') 'js'
     $sourceDir = Split-Path -Parent $LocalizerSource
     Copy-AfruIfChanged $LocalizerSource (Join-Path $jsDir $script:JsName)
@@ -220,7 +220,7 @@ function Restore-AfruAll {
 function Install-AfruAppFiles {
     param([Parameter(Mandatory)][string]$SourceRoot, [Parameter(Mandatory)][string]$AppRoot)
     foreach ($rel in $script:AppFiles) {
-        if (-not (Test-Path -LiteralPath (Join-Path $SourceRoot $rel))) { throw "В папке AlecaFrame-RU нет файла $rel. Скачайте архив заново." }
+        if (-not (Test-Path -LiteralPath (Join-Path $SourceRoot $rel))) { throw "В папке AlecaFrame-RUS нет файла $rel. Скачайте архив заново." }
     }
     $sourceFull = [IO.Path]::GetFullPath($SourceRoot).TrimEnd('\', '/')
     $appFull = [IO.Path]::GetFullPath($AppRoot).TrimEnd('\', '/')
@@ -341,7 +341,7 @@ function Get-AfruIntegrityFailure {
     $null
 }
 
-# Есть ли в журнале окна строка после указанного момента (например, «[AlecaFrame-RU] loaded»).
+# Есть ли в журнале окна строка после указанного момента (например, «[AlecaFrame-RUS] loaded»).
 function Test-AfruLogLine {
     param([Parameter(Mandatory)][string]$Path, [Parameter(Mandatory)][string]$Pattern, [datetime]$Since)
     if (-not (Test-Path -LiteralPath $Path)) { return $false }
@@ -572,7 +572,7 @@ function Register-AfruIntegration {
     $launch = Get-AfruAgentCommand -AgentPath $Paths.Agent -Launch
     if ($Paths.StartupLink) {
         New-AfruShortcut -Path $Paths.StartupLink -Target $agent.Target -Arguments $agent.Arguments -Icon $Paths.Icon `
-            -Description 'AlecaFrame-RU: русский интерфейс AlecaFrame при каждом запуске Overwolf' -WorkingDirectory $Paths.App
+            -Description 'AlecaFrame-RUS: русский интерфейс AlecaFrame при каждом запуске Overwolf' -WorkingDirectory $Paths.App
     }
     $links = @($Paths.StartMenuLink)
     if (-not $NoDesktop) { $links += $Paths.DesktopLink }
@@ -584,7 +584,7 @@ function Register-AfruIntegration {
     $key = $Paths.UninstallKey
     New-Item -Path $key -Force | Out-Null
     $values = [ordered]@{
-        DisplayName = 'AlecaFrame-RU (русский интерфейс AlecaFrame)'; DisplayVersion = $Version; Publisher = 'AlecaFrame-RU'
+        DisplayName = 'AlecaFrame-RUS (русификатор AlecaFrame)'; DisplayVersion = $Version; Publisher = 'TuftyTech'
         InstallLocation = $Paths.App; DisplayIcon = $Paths.Icon; URLInfoAbout = 'https://github.com/TuftyTech/AlecaFrame-RUS'
         UninstallString = "`"$ps`" -NoProfile -ExecutionPolicy Bypass -File `"$($Paths.Uninstaller)`" -Pause"
     }

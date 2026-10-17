@@ -1,11 +1,14 @@
 /*
- * AlecaFrame-RU: optional features on top of the translation.
+ * AlecaFrame-RUS: optional features on top of the translation.
  *  - «Графит»: our own dark color theme over AlecaFrame's CSS variables.
  *  - Inventory: manual price refresh from warframe.market through AlecaFrame's
  *    own market client (plugin.GetBuySellWindowData, the call behind the WTS/WTB panel).
- *  - Relic reward overlay: live prices for the detected rewards, and no "best"
- *    highlight while no reward has a known price.
+ *  - Relic reward overlay: an instant price for every Prime part (daily averages from warframe.market,
+ *    preloaded), refined by live orders; ducats per platinum and missing set parts on each card;
+ *    no "best" highlight while no reward has a known price.
  *  - Main window: optional collapse of the ad block into its Patreon line (off by default).
+ *  - Overlays: optional ad-free layout of the reward and riven windows (off by default).
+ *  - Russian search: every window gets its own wrapper of AlecaFrame's plugin (src/search.js).
  * Settings live in localStorage under "afru.*" and are shared by every AlecaFrame window.
  * The subscription status and AlecaFrame's own theme data are never touched.
  */
@@ -20,10 +23,20 @@
 
   var PREFIX = 'afru.';
   var PRICE_CACHE_KEY = PREFIX + 'prices';
-  var DEFAULTS = { theme: 'default', themeOverlays: true, relicLivePrices: true, collapseAds: false, hiddenTabs: '' };
+  var BULK_PRICES_KEY = PREFIX + 'bulkPrices';
+  var DEFAULTS = {
+    theme: 'default', themeOverlays: true, relicLivePrices: true, collapseAds: false, hideOverlayAds: false,
+    hiddenTabs: '', lang: 'ru',
+  };
+  var LANGUAGES = { ru: 1, en: 1, auto: 1 };
   var THEMES = { graphite: 1 };
   var REFINEMENTS = { intact: 'I', exceptional: 'E', flawless: 'F', radiant: 'R' };
+  // Windows whose ad slot AlecaFrame lays out through shouldAdsBeShown().
+  var AD_LAYOUT_PAGES = { relicOverlay: 1, rivenOverlay: 1, AFBuilds: 1 };
   var config = {
+    // Daily average prices of every Prime part and set (WFInfo data via warframestat.us, open CORS, ~70 KB).
+    bulkPricesUrl: 'https://api.warframestat.us/wfinfo/prices/',
+    bulkPricesTtlMs: 3 * 60 * 60 * 1000,
     priceTtlMs: 60 * 60 * 1000,
     // The relic overlay shows a cached price at once and asks again when it is older than this.
     relicPriceMaxAgeMs: 10 * 60 * 1000,
@@ -38,7 +51,7 @@
 
   function now() { return Date.now(); }
   function warn(message, error) {
-    try { root.console.warn('[AlecaFrame-RU] ' + message, error || ''); } catch (e) { /* no console */ }
+    try { root.console.warn('[AlecaFrame-RUS] ' + message, error || ''); } catch (e) { /* no console */ }
   }
 
   function el(tag, attrs, children) {
@@ -102,6 +115,8 @@
     ['tabMasteryHelper', 'Помощник мастерства'],
     ['tabInventory', 'Инвентарь'],
     ['tabRelicPlanner', 'Реликвии'],
+    // Added by src/farm.js, possibly after the settings tab is built.
+    ['afruTabFarm', 'Где фармить'],
     ['tabRivenExplorer', 'Моды Разлома'],
     ['tabWarframeMarket', 'Warframe Market'],
     ['proAnalyticsTab', 'Аналитика торговли'],
@@ -214,7 +229,7 @@
     if (block.querySelector('.afru-adExpand')) return true;
     var expand = el('button', {
       type: 'button', 'class': 'afru-adExpand', translate: 'no',
-      title: 'Развернуть рекламный блок. Свернуть снова: Настройки → AlecaFrame-RU.',
+      title: 'Развернуть рекламный блок. Свернуть снова: Настройки → AlecaFrame-RUS.',
     }, ['Показать']);
     expand.addEventListener('click', function () { setAdsCollapsed(false); });
     block.appendChild(expand);
@@ -356,6 +371,52 @@
   function clearPrices() {
     priceCache = {};
     writeRaw(PRICE_CACHE_KEY, null);
+  }
+
+  // Daily averages for every Prime part: the reward window shows a price at once, before (or without)
+  // a live request. Shared by all windows through localStorage, refreshed every few hours.
+  function readBulkPrices() {
+    try {
+      var data = JSON.parse(readRaw(BULK_PRICES_KEY) || 'null');
+      return data && typeof data.t === 'number' && data.p && typeof data.p === 'object' ? data : null;
+    } catch (e) { return null; }
+  }
+  var bulkPrices = readBulkPrices();
+  var bulkRequest = null;
+
+  function parseBulkPrices(list) {
+    var prices = {};
+    (Array.isArray(list) ? list : []).forEach(function (row) {
+      var value = Math.round(Number(row && row.custom_avg));
+      if (row && typeof row.name === 'string' && value > 0) prices[row.name.replace(/\s+/g, ' ').trim().toLowerCase()] = value;
+    });
+    return prices;
+  }
+
+  function loadBulkPrices(force) {
+    if (!force && bulkPrices && now() - bulkPrices.t < config.bulkPricesTtlMs) return Promise.resolve(bulkPrices);
+    if (bulkRequest) return bulkRequest;
+    if (typeof root.fetch !== 'function') return Promise.resolve(bulkPrices);
+    bulkRequest = root.fetch(config.bulkPricesUrl, { cache: 'no-cache' })
+      .then(function (res) { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(function (list) {
+        var prices = parseBulkPrices(list);
+        if (!Object.keys(prices).length) throw new Error('empty price list');
+        bulkPrices = { t: now(), p: prices };
+        writeRaw(BULK_PRICES_KEY, JSON.stringify(bulkPrices));
+        return bulkPrices;
+      })
+      .catch(function (e) { warn('daily prices unavailable', e); return bulkPrices; })
+      .then(function (result) { bulkRequest = null; return result; });
+    return bulkRequest;
+  }
+
+  /** Daily average in platinum, or null. Warframe parts are listed with " Blueprint", weapon parts without. */
+  function bulkPrice(name) {
+    if (!bulkPrices || !name) return null;
+    var key = String(name).replace(/\s+/g, ' ').trim().toLowerCase();
+    var p = bulkPrices.p;
+    return p[key] || p[key + ' blueprint'] || p[key.replace(/ blueprint$/, '')] || null;
   }
 
   // --------------------------------------------------------------- inventory
@@ -582,6 +643,10 @@
     if (live) live.checked = getSetting('relicLivePrices');
     var ads = doc.getElementById('afruCollapseAds');
     if (ads) ads.checked = getSetting('collapseAds');
+    var overlayAds = doc.getElementById('afruHideOverlayAds');
+    if (overlayAds) overlayAds.checked = getSetting('hideOverlayAds');
+    var lang = doc.getElementById('afruLang');
+    if (lang) lang.value = LANGUAGES[getSetting('lang')] ? getSetting('lang') : 'ru';
     var hidden = hiddenTabs();
     HIDEABLE_TABS.forEach(function (tab) {
       var box = doc.getElementById('afruTab-' + tab[0]);
@@ -603,28 +668,46 @@
     ]);
     var clearButton = el('button', { 'class': 'buttonSettingsTest', type: 'button' }, ['Сбросить сохранённые цены']);
     var clearStatus = el('span', { 'class': 'afru-settingsStatus', 'aria-live': 'polite' });
+    var langSelect = el('select', { id: 'afruLang', 'class': 'settingsSelect' }, [
+      el('option', { value: 'ru' }, ['Русский']),
+      el('option', { value: 'en' }, ['English (original)']),
+      el('option', { value: 'auto' }, ['Как в Windows / Same as Windows']),
+    ]);
 
     var tab = el('div', { id: 'afruSettingsTab', 'class': 'settingsTab', translate: 'no' }, [
+      el('div', { 'class': 'settingsGroup' }, [
+        el('span', { 'class': 'settingsTitle' }, ['Язык интерфейса / Interface language']),
+        el('label', { 'class': 'settingsCheckBoxHolder', 'for': 'afruLang' }, ['Язык:', langSelect]),
+        el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
+          'English turns off only the translation: Russian search, prices, the «Где фармить» tab and the other ' +
+          'AlecaFrame-RUS features stay. Главное окно перезагрузится, оверлеи переключатся при следующем открытии.',
+        ]),
+      ]),
       el('div', { 'class': 'settingsGroup' }, [
         el('span', { 'class': 'settingsTitle' }, ['Оформление']),
         el('label', { 'class': 'settingsCheckBoxHolder', 'for': 'afruTheme' }, ['Тема:', themeSelect]),
         checkboxRow('afruThemeOverlays', 'Применять тему к оверлеям в игре', 'indent'),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Пока тема AlecaFrame-RU включена, она заменяет выбранную тему AlecaFrame.',
+          'Пока тема AlecaFrame-RUS включена, она заменяет выбранную тему AlecaFrame.',
         ]),
       ]),
       el('div', { 'class': 'settingsGroup' }, [
-        el('span', { 'class': 'settingsTitle' }, ['Главное окно']),
-        checkboxRow('afruCollapseAds', 'Сворачивать рекламный блок'),
+        el('span', { 'class': 'settingsTitle' }, ['Реклама']),
+        checkboxRow('afruCollapseAds', 'Сворачивать рекламный блок в главном окне'),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
           'Блок сжимается в узкую полоску со ссылкой на Patreon, освободившееся место занимают таймеры. ' +
           'Пока блок свёрнут, реклама не загружается. Развернуть: кнопка «Показать» на полоске.',
+        ]),
+        checkboxRow('afruHideOverlayAds', 'Скрывать рекламу в оверлеях (награды реликвий, ривены) и в AFBuilds'),
+        el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
+          'Окно наград показывает только награды и становится уже, рекламный блок не загружается. ' +
+          'Действует со следующего открытия оверлея.',
         ]),
       ]),
       el('div', { 'class': 'settingsGroup' }, [
         el('span', { 'class': 'settingsTitle' }, ['Вкладки бокового меню']),
         el('div', { 'class': 'afru-tabList' }, HIDEABLE_TABS
-          .filter(function (tab) { return menuItem(tab[0]); })
+          .filter(function (tab) { return tab[0] === 'afruTabFarm' ? !!menuItem('tabRelicPlanner') : menuItem(tab[0]); })
           .map(function (tab) { return checkboxRow('afruTab-' + tab[0], tab[1]); })),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
           'Снятая галочка убирает вкладку из меню слева. «Литейная» остаётся всегда.',
@@ -634,11 +717,12 @@
         el('span', { 'class': 'settingsTitle' }, ['Цены warframe.market']),
         checkboxRow('afruRelicLive', 'Уточнять цены наград в окне реликвии по текущим заказам'),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Окно наград сразу показывает сохранённую цену, а если ей больше 10 минут — запрашивает новую; ' +
-          'разные награды запрашиваются одновременно.',
+          'Окно наград сразу показывает цену: сохранённую или среднюю цену сделок за сутки (загружается заранее ' +
+          'для всех Prime-частей). Если цене больше 10 минут, запрашиваются текущие заказы, разные награды одновременно. ' +
+          'Серая точка у цены означает среднюю за сутки, зелёная означает текущие заказы.',
         ]),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Кнопка «Обновит�� цены» во вкладке «Инвентарь» берёт заказы игроков онлайн через встроенный в AlecaFrame ' +
+          'Кнопка «Обновить цены» во вкладке «Инвентарь» берёт заказы игроков онлайн через встроенный в AlecaFrame ' +
           'клиент warframe.market. Обновлённые цены хранятся 1 час.',
         ]),
         el('div', { 'class': 'settingsCheckBoxHolder' }, [clearButton, clearStatus]),
@@ -649,6 +733,11 @@
     tab.querySelector('#afruThemeOverlays').addEventListener('change', function (e) { setSetting('themeOverlays', e.target.checked); });
     tab.querySelector('#afruRelicLive').addEventListener('change', function (e) { setSetting('relicLivePrices', e.target.checked); });
     tab.querySelector('#afruCollapseAds').addEventListener('change', function (e) { setAdsCollapsed(e.target.checked); });
+    tab.querySelector('#afruHideOverlayAds').addEventListener('change', function (e) { setSetting('hideOverlayAds', e.target.checked); });
+    langSelect.addEventListener('change', function () {
+      setSetting('lang', langSelect.value);
+      try { root.location.reload(); } catch (e) { warn('reload failed', e); }
+    });
     HIDEABLE_TABS.forEach(function (item) {
       var box = tab.querySelector('#afruTab-' + item[0]);
       if (box) box.addEventListener('change', function (e) { setTabHidden(item[0], !e.target.checked); });
@@ -673,7 +762,7 @@
     if (doc.getElementById('afruSettingsTab')) return true;
 
     var tab = buildSettingsTab();
-    var button = el('div', { 'class': 'tabHeaderOption', tabid: 'afruSettingsTab', translate: 'no' }, ['AlecaFrame-RU']);
+    var button = el('div', { 'class': 'tabHeaderOption', tabid: 'afruSettingsTab', translate: 'no' }, ['AlecaFrame-RUS']);
     // Same behavior as AlecaFrame's doTabHeaderWork(), whose handlers also hide this tab.
     button.addEventListener('click', function () {
       Array.prototype.forEach.call(header.children, function (c) { c.classList.remove('selected'); });
@@ -702,29 +791,128 @@
   // Relic rewards that have no orders on warframe.market.
   var UNTRADEABLE_REWARD = /^(\d+\s*x\s*)?forma blueprint$|^riven sliver$|^exilus .*adapter( blueprint)?$|^kuva$|^void traces$/i;
 
-  /**
-   * A cached price shows at once; one request per distinct reward (a squad often gets the same
-   * part twice) refreshes it when it is older than config.relicPriceMaxAgeMs.
-   */
-  function refreshRelicPrices(list) {
-    var app = root.relicsApp;
-    if (!list || !list.length) return;
+  function rewardsByName(list) {
     var byName = {};
-    for (var i = 0; i < list.length; i++) {
+    for (var i = 0; list && i < list.length; i++) {
       var relic = list[i];
       if (!relic || !relic.name || relic.detected === false || UNTRADEABLE_REWARD.test(String(relic.name).trim())) continue;
       (byName[relic.name] = byName[relic.name] || []).push(relic);
     }
+    return byName;
+  }
+
+  /** Fills rewards that have no price yet with the daily average; marks where each price came from. */
+  function applyBulkPrices(list) {
+    var byName = rewardsByName(list);
+    Object.keys(byName).forEach(function (name) {
+      var avg = bulkPrice(name);
+      if (!avg) return;
+      byName[name].forEach(function (reward) {
+        if (Number(reward.platinum) > 0) return;
+        reward.platinum = avg;
+        reward.afruSource = 'avg';
+      });
+    });
+  }
+
+  /**
+   * The daily average (or a cached live price) shows at once; one request per distinct reward (a squad
+   * often gets the same part twice) replaces it with live orders when older than config.relicPriceMaxAgeMs.
+   */
+  function refreshRelicPrices(list) {
+    var app = root.relicsApp;
+    if (!list || !list.length) return;
+    applyBulkPrices(list);
+    if (!bulkPrices || now() - bulkPrices.t >= config.bulkPricesTtlMs) {
+      loadBulkPrices().then(function () { if (app.relics === list) applyBulkPrices(list); });
+    }
+    if (!getSetting('relicLivePrices')) return;
+    var byName = rewardsByName(list);
     Object.keys(byName).forEach(function (name) {
       function show(entry) {
         if (!entry || entry.s == null || app.relics !== list) return;
-        byName[name].forEach(function (reward) { reward.platinum = entry.s; });
+        byName[name].forEach(function (reward) { reward.platinum = entry.s; reward.afruSource = 'live'; });
       }
       var cached = freshPrice(priceKey(name, null));
       show(cached);
       if (cached && now() - cached.t < config.relicPriceMaxAgeMs) return;
       fetchPrice(name, null).then(function (res) { show(res.entry); });
     });
+  }
+
+  function L(ru, en) { return root.__AF_RU__ && root.__AF_RU__.active === false ? en : ru; }
+
+  // Added to the reward card template before Vue compiles it (see the plugin hook below).
+  function relicInfoTemplate() {
+    return '<div class="afru-relicInfo" translate="no">' +
+      '<span v-if="relic.afruSource" class="afru-relicSource" :data-source="relic.afruSource" :title="relic.afruSource==\'live\'?\'' +
+        L('Цена по текущим заказам warframe.market', 'Live warframe.market orders') + '\':\'' +
+        L('Средняя цена сделок за сутки на warframe.market, уточняется', 'Daily average on warframe.market, refining') + '\'"></span>' +
+      '<span v-if="relic.platinum>0 && relic.ducats>0" class="afru-relicRatio" title="' +
+        L('Дукатов за 1 платину. От 10 и выше обычно выгоднее сдать Баро за дукаты', 'Ducats per platinum') + '">' +
+        '{{ (relic.ducats / relic.platinum).toFixed(1) }} ' + L('дук/пл', 'duc/pl') + '</span>' +
+      '<span v-if="relic.componentData && relic.componentData.length && relic.componentData.some(c => !(c.quantityOwned > 0))" ' +
+        'class="afru-relicMissing" title="' + L('Частей комплекта, которых у вас нет', 'Set parts you do not own') + '">' +
+        L('нет', 'missing') + ' {{ relic.componentData.filter(c => !(c.quantityOwned > 0)).length }}/{{ relic.componentData.length }}</span>' +
+      '</div>';
+  }
+
+  function patchRelicTemplate() {
+    if (page !== 'relicOverlay' || root.relicsApp) return false;
+    var card = doc.querySelector('.relicPart .relicHolder > .relic');
+    var prices = card && card.querySelector('.relicItemPrices');
+    if (!prices || card.querySelector('.afru-relicInfo')) return false;
+    prices.insertAdjacentHTML('afterend', relicInfoTemplate());
+    return true;
+  }
+
+  // ------------------------------------------------------------- plugin hook
+
+  /*
+   * AlecaFrame's scripts each run `var plugin = overwolf.windows.getMainWindow().plugin;`. Every such
+   * assignment goes through this setter: the window gets its own wrapper (Russian search) and the hooks
+   * run at known moments, in sharedOverwolfStuff.js (whose functions already exist) and at the top of
+   * the page's main script (its markup is parsed, Vue is not mounted yet).
+   */
+  var wrappedPlugins = typeof WeakMap === 'function' ? new WeakMap() : null;
+  var adLayoutHooked = false;
+
+  function wrapPlugin(value) {
+    var search = root.__AF_RU_SEARCH__;
+    if (!value || typeof value.get !== 'function' || !search || !wrappedPlugins || value.__afruWrapper) return value;
+    var known = wrappedPlugins.get(value);
+    if (known) return known;
+    var wrapper = Object.create(value);
+    wrapper.get = function () { return search.wrapClient(value.get.apply(value, arguments)); };
+    Object.defineProperty(wrapper, '__afruWrapper', { value: true });
+    wrappedPlugins.set(value, wrapper);
+    return wrapper;
+  }
+
+  // With the setting on, the reward and riven windows take the layout AlecaFrame uses when no ad is
+  // shown: no ad slot, a narrower window. Read when the window opens.
+  function hookAdLayout() {
+    if (adLayoutHooked || !AD_LAYOUT_PAGES[page] || typeof root.shouldAdsBeShown !== 'function') return;
+    adLayoutHooked = true;
+    var original = root.shouldAdsBeShown;
+    root.shouldAdsBeShown = function () { return getSetting('hideOverlayAds') ? false : original.apply(this, arguments); };
+  }
+
+  function onPluginAssigned() {
+    try { hookAdLayout(); } catch (e) { warn('ad layout hook failed', e); }
+    try { patchRelicTemplate(); } catch (e) { warn('reward card template failed', e); }
+  }
+
+  function watchPlugin() {
+    var current = wrapPlugin(root.plugin);
+    try {
+      Object.defineProperty(root, 'plugin', {
+        configurable: true,
+        enumerable: true,
+        get: function () { return current; },
+        set: function (value) { current = wrapPlugin(value); onPluginAssigned(); },
+      });
+    } catch (e) { warn('cannot watch the plugin', e); }
   }
 
   // AlecaFrame starts the overlay on window.onload, which also waits for the ad frames, or
@@ -744,10 +932,8 @@
     };
     // Replacing a method is not reactive: redraw cards rendered with the old one.
     if (typeof app.$forceUpdate === 'function') app.$forceUpdate();
-    if (getSetting('relicLivePrices')) {
-      app.$watch('relics', refreshRelicPrices);
-      if (app.relics && app.relics.length) refreshRelicPrices(app.relics);
-    }
+    app.$watch('relics', refreshRelicPrices);
+    if (app.relics && app.relics.length) refreshRelicPrices(app.relics);
     return true;
   }
 
@@ -776,6 +962,7 @@
 
   function applyDocumentState() { applyTheme(); applyAdLayout(); applyHiddenTabs(); }
 
+  watchPlugin();
   if (page === 'main') watchAdInstance();
   // The installer puts the script right after <head>; when run even earlier there is no <html> yet.
   if (injectStyle() && doc.documentElement) applyDocumentState();
@@ -799,9 +986,21 @@
     fetchPrice: fetchPrice,
     clearPrices: clearPrices,
     refreshInventoryPrices: refreshInventoryPrices,
+    loadBulkPrices: loadBulkPrices,
+    bulkPrice: bulkPrice,
+    parseBulkPrices: parseBulkPrices,
+    patchRelicTemplate: patchRelicTemplate,
+    whenReady: whenReady,
+    el: el,
+    warn: warn,
+    page: page,
   };
 
-  if (page === 'main') whenReady([setupInventory, setupSettingsTab, setupAdStrip]);
+  if (page === 'main') {
+    whenReady([setupInventory, setupSettingsTab, setupAdStrip]);
+    // Ahead of the first reward screen, so the overlay never waits for it.
+    root.setTimeout(function () { loadBulkPrices(); }, 3000);
+  }
   else if (page === 'relicOverlay') {
     doc.addEventListener('DOMContentLoaded', startRelicWindowEarly);
     whenReady([setupRelicOverlay]);

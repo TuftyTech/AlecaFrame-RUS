@@ -1,4 +1,4 @@
-﻿# Фоновый агент AlecaFrame-RU. Запускается при входе в Windows (ярлык в «Автозагрузке») и ярлыком
+﻿# Фоновый агент AlecaFrame-RUS. Запускается при входе в Windows (ярлык в «Автозагрузке») и ярлыком
 # «AlecaFrame (русский)» (-Launch). Окна у него нет.
 #  - Overwolf запущен без нужных флагов (автозапуск, обновление Overwolf) -> файлы AlecaFrame возвращаются
 #    в исходный вид, а только что запущенный Overwolf перезапускается с флагами.
@@ -38,7 +38,7 @@ function Request-Launch {
 function Show-Message([string]$Text, [switch]$Question) {
     try {
         Add-Type -AssemblyName System.Windows.Forms
-        $result = [System.Windows.Forms.MessageBox]::Show($Text, 'AlecaFrame-RU',
+        $result = [System.Windows.Forms.MessageBox]::Show($Text, 'AlecaFrame-RUS',
             $(if ($Question) { [System.Windows.Forms.MessageBoxButtons]::YesNo } else { [System.Windows.Forms.MessageBoxButtons]::OK }),
             $(if ($Question) { [System.Windows.Forms.MessageBoxIcon]::Question } else { [System.Windows.Forms.MessageBoxIcon]::Warning }),
             $(if ($Question) { [System.Windows.Forms.MessageBoxDefaultButton]::Button2 } else { [System.Windows.Forms.MessageBoxDefaultButton]::Button1 }),
@@ -159,7 +159,7 @@ function Request-ReportOnly {
         "Файлы AlecaFrame уже возвращены в исходный вид.`n`n" +
         "Можно запускать Overwolf ещё и с флагом force-validation-report-only: Overwolf по-прежнему сверяет файлы, " +
         "но о несовпадениях только пишет в журнал и не закрывает приложение. Это касается ВСЕХ приложений Overwolf, " +
-        "пока AlecaFrame-RU установлен.`n`nПерезапустить Overwolf с этим флагом? Ответ запомнится.")
+        "пока AlecaFrame-RUS установлен.`n`nПерезапустить Overwolf с этим флагом? Ответ запомнится.")
     if ($allowed) { Set-Content -LiteralPath $paths.ReportOnly -Value (Get-Date -Format o) }
     $allowed
 }
@@ -196,7 +196,7 @@ function Resolve-IntegrityFailure([object]$Failure, [object]$VersionDir, [object
 
 function Invoke-Tick {
     if (-not (Test-Path -LiteralPath $paths.Localizer)) {
-        Restore-Files 'AlecaFrame-RU удалён'
+        Restore-Files 'AlecaFrame-RUS удалён'
         $script:stop = $true
         return
     }
@@ -260,7 +260,7 @@ function Invoke-Tick {
 
     if ($state -eq 'ok' -and $script:patchedAt -and -not $blocked) {
         if (-not $script:loadedSeen -and (Test-AfruLogLine -Path (Join-Path $paths.AppLog 'MainWindow.html.log') `
-                -Pattern '\[AlecaFrame-RU\] loaded' -Since $script:patchedAt)) {
+                -Pattern '\[AlecaFrame-RUS?\] loaded' -Since $script:patchedAt)) {
             $script:loadedSeen = $true
             Set-Status 'loaded' 'AlecaFrame открыт на русском'
         }
