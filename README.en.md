@@ -16,7 +16,7 @@ Russian localization for AlecaFrame, the Warframe companion app: full translatio
 - **Translation:** 900 of 900 interface strings of AlecaFrame 2.6.90, item names from the official Russian Warframe localization, the full item details window. Terms match the Russian game client.
 - **Russian search in every search field:** Foundry, Inventory, Relics, Rivens, WFMarket. Word prefixes in any order, wrong keyboard layout («ytrjhf» = «некора»), accidental matches dropped («эш» finds Ash, not Fl**ash**).
 - **Where to farm:** for a relic, where it drops and which fissures of its era are open right now; for a Prime part, which relics give it and whether they are vaulted; active fissures by era (normal, Steel Path, Void Storms), fast missions first; which era of *your* relics to crack now. Data from [api.warframestat.us](https://api.warframestat.us).
-- **Relic reward overlay:** a price on every reward instantly (daily averages preloaded), then refined by live orders in parallel; ducats per platinum and missing set parts on each card.
+- **Relic reward overlay:** every time the window opens, each reward is priced from current warframe.market orders (cheapest in-game seller, fetched directly through AlecaFrame's own market client), with an instant placeholder until they arrive; a green dot marks a fresh price. Ducats per platinum and missing set parts on each card.
 - **Ads:** optional collapse of the main window ad block and an optional ad-free layout of the reward, riven and AFBuilds overlays. Both off by default; hidden ads are not loaded.
 - **Install once:** one `Install.cmd`, one question. Russian after every Windows restart and AlecaFrame update. Interface language switch in settings: Русский, English (original), Same as Windows.
 

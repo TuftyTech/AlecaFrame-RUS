@@ -337,6 +337,14 @@
     background-color: #3fbf7f;
 }
 
+.afru-relicSource[data-loading] {
+    animation: afru-pulse 0.9s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .afru-relicSource[data-loading] { animation: none; }
+}
+
 .afru-relicRatio,
 .afru-relicMissing {
     padding: 0 0.4em;

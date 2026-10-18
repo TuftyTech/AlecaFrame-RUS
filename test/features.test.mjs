@@ -121,6 +121,10 @@ test('relic overlay: daily prices show at once, the card gets ducats per platinu
   await waitFor(() => doc.querySelector('.relic .plat')?.textContent === '12', 'daily price');
   const [nova, braton, forma] = doc.querySelectorAll('.relic');
   assert.equal(win.relicsApp.relics[0].afruSource, 'avg');
+  const dot = nova.querySelector('.afru-relicSource');
+  assert.equal(dot.dataset.source, 'avg');
+  assert.equal(dot.hasAttribute('data-loading'), false);
+  assert.equal(dot.getAttribute('title'), 'Средняя цена сделок за сутки на warframe.market');
   assert.equal(nova.querySelector('.afru-relicRatio').textContent.trim(), '3.8 дук/пл');
   assert.equal(nova.querySelector('.afru-relicMissing').textContent.trim(), 'нет 2/3');
   assert.equal(braton.querySelector('.plat').textContent, '9', 'AlecaFrame prices are kept');

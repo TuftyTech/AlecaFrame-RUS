@@ -3,8 +3,9 @@
  *  - «Графит»: our own dark color theme over AlecaFrame's CSS variables.
  *  - Inventory: manual price refresh from warframe.market through AlecaFrame's
  *    own market client (plugin.GetBuySellWindowData, the call behind the WTS/WTB panel).
- *  - Relic reward overlay: an instant price for every Prime part (daily averages from warframe.market,
- *    preloaded), refined by live orders; ducats per platinum and missing set parts on each card;
+ *  - Relic reward overlay: current warframe.market orders for every reward each time the window opens
+ *    (same client as the Inventory button), with an instant placeholder until they arrive (an earlier
+ *    price or the preloaded daily average); ducats per platinum and missing set parts on each card;
  *    no "best" highlight while no reward has a known price.
  *  - Main window: optional collapse of the ad block into its Patreon line (off by default).
  *  - Overlays: optional ad-free layout of the reward and riven windows (off by default).
@@ -38,8 +39,8 @@
     bulkPricesUrl: 'https://api.warframestat.us/wfinfo/prices/',
     bulkPricesTtlMs: 3 * 60 * 60 * 1000,
     priceTtlMs: 60 * 60 * 1000,
-    // The relic overlay shows a cached price at once and asks again when it is older than this.
-    relicPriceMaxAgeMs: 10 * 60 * 1000,
+    // The reward window asks for every reward each time it opens; within this time a name is asked once.
+    relicRequestReuseMs: 20 * 1000,
     maxCachedPrices: 3000,
     // warframe.market allows about 3 requests per second.
     requestsPerSecond: 3,
@@ -715,14 +716,15 @@
       ]),
       el('div', { 'class': 'settingsGroup' }, [
         el('span', { 'class': 'settingsTitle' }, ['Цены warframe.market']),
-        checkboxRow('afruRelicLive', 'Уточнять цены наград в окне реликвии по текущим заказам'),
+        checkboxRow('afruRelicLive', 'Свежие цены наград в окне реликвии с warframe.market'),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Окно наград сразу показывает цену: сохранённую или среднюю цену сделок за сутки (загружается заранее ' +
-          'для всех Prime-частей). Если цене больше 10 минут, запрашиваются текущие заказы, разные награды одновременно. ' +
-          'Серая точка у цены означает среднюю за сутки, зелёная означает текущие заказы.',
+          'При каждом открытии окна наград цены всех наград заново берутся из текущих заказов warframe.market: ' +
+          'самый дешёвый продавец в игре. Это тот же клиент, что у кнопки «Обновить цены», он обращается к warframe.market напрямую. ' +
+          'Пока ответ в пути (обычно около секунды), видна прежняя цена или средняя за сутки, точка у цены мигает. ' +
+          'Зелёная точка: цена свежая. Серая: свежую получить не удалось, причина в подсказке.',
         ]),
         el('div', { 'class': 'settingsCheckBoxHolder indent small' }, [
-          'Кнопка «Обновить цены» во вкладке «Инвентарь» берёт заказы игроков онлайн через встроенный в AlecaFrame ' +
+          'Кнопка «Обновить цены» во вкладке «Инвентарь» берёт заказы игроков в игре через встроенный в AlecaFrame ' +
           'клиент warframe.market. Обновлённые цены хранятся 1 час.',
         ]),
         el('div', { 'class': 'settingsCheckBoxHolder' }, [clearButton, clearStatus]),
@@ -801,7 +803,33 @@
     return byName;
   }
 
-  /** Fills rewards that have no price yet with the daily average; marks where each price came from. */
+  /*
+   * Where a reward's price came from: 'live' (orders fetched while this window is open), 'cached' (orders
+   * fetched afruAge minutes ago), 'avg' (daily average) or 'af' (AlecaFrame's own price).
+   * afruLoading is set while current orders are on their way, afruError when they could not be used.
+   */
+  function rewardTitle(reward) {
+    if (reward.afruSource === 'live') {
+      return L('Свежая цена: текущие заказы warframe.market, самый дешёвый продавец в игре. Получена при открытии окна',
+        'Fresh price: current warframe.market orders, the cheapest in-game seller. Fetched when this window opened');
+    }
+    var ago = reward.afruAge > 0 ? L(reward.afruAge + ' мин назад', reward.afruAge + ' min ago') : L('меньше минуты назад', 'under a minute ago');
+    var what = reward.afruSource === 'avg' ? L('Средняя цена сделок за сутки на warframe.market', 'Daily average on warframe.market')
+      : reward.afruSource === 'cached' ? L('Цена по заказам warframe.market ', 'warframe.market orders ') + ago
+      : reward.afruSource === 'af' ? L('Цена AlecaFrame', 'AlecaFrame price')
+      : L('Цены пока нет', 'No price yet');
+    if (reward.afruLoading) return what + L('. Запрашиваются текущие заказы...', '. Fetching current orders...');
+    if (reward.afruError === 'nolistings') return what + L('. Сейчас нет продавцов в игре', '. No in-game sellers right now');
+    if (reward.afruError) return what + L('. Текущие заказы получить не удалось', '. Current orders are unavailable');
+    return what;
+  }
+
+  function markReward(reward, changes) {
+    Object.keys(changes).forEach(function (key) { reward['afru' + key] = changes[key]; });
+    reward.afruTitle = rewardTitle(reward);
+  }
+
+  /** Fills rewards that have no price yet with the daily average. */
   function applyBulkPrices(list) {
     var byName = rewardsByName(list);
     Object.keys(byName).forEach(function (name) {
@@ -810,33 +838,62 @@
       byName[name].forEach(function (reward) {
         if (Number(reward.platinum) > 0) return;
         reward.platinum = avg;
-        reward.afruSource = 'avg';
+        markReward(reward, { Source: 'avg' });
       });
     });
   }
 
+  // One request per reward name while the window is open: a squad often gets the same part twice.
+  var relicRequests = {};
+
+  function relicRequest(name) {
+    var known = relicRequests[name];
+    if (known && now() - known.at < config.relicRequestReuseMs) return known.promise;
+    relicRequests[name] = { at: now(), promise: fetchPrice(name, null) };
+    return relicRequests[name].promise;
+  }
+
   /**
-   * The daily average (or a cached live price) shows at once; one request per distinct reward (a squad
-   * often gets the same part twice) replaces it with live orders when older than config.relicPriceMaxAgeMs.
+   * A price shows at once (an earlier live price, AlecaFrame's own or the daily average). Every time the
+   * window opens, each reward is then asked for on warframe.market through the same AlecaFrame client as
+   * the Inventory button, and the current orders replace that placeholder.
    */
   function refreshRelicPrices(list) {
     var app = root.relicsApp;
     if (!list || !list.length) return;
+    var live = getSetting('relicLivePrices');
+    var byName = rewardsByName(list);
+    if (live) {
+      Object.keys(byName).forEach(function (name) {
+        var cached = freshPrice(priceKey(name, null));
+        byName[name].forEach(function (reward) {
+          if (cached && cached.s != null) {
+            reward.platinum = cached.s;
+            markReward(reward, { Source: 'cached', Age: Math.floor((now() - cached.t) / 60000), Loading: true });
+          } else {
+            markReward(reward, { Source: Number(reward.platinum) > 0 ? 'af' : reward.afruSource, Loading: true });
+          }
+        });
+      });
+    }
     applyBulkPrices(list);
     if (!bulkPrices || now() - bulkPrices.t >= config.bulkPricesTtlMs) {
       loadBulkPrices().then(function () { if (app.relics === list) applyBulkPrices(list); });
     }
-    if (!getSetting('relicLivePrices')) return;
-    var byName = rewardsByName(list);
+    if (!live) return;
     Object.keys(byName).forEach(function (name) {
-      function show(entry) {
-        if (!entry || entry.s == null || app.relics !== list) return;
-        byName[name].forEach(function (reward) { reward.platinum = entry.s; reward.afruSource = 'live'; });
-      }
-      var cached = freshPrice(priceKey(name, null));
-      show(cached);
-      if (cached && now() - cached.t < config.relicPriceMaxAgeMs) return;
-      fetchPrice(name, null).then(function (res) { show(res.entry); });
+      relicRequest(name).then(function (res) {
+        if (app.relics !== list) return;
+        var entry = res.entry && res.entry.s != null ? res.entry : null;
+        byName[name].forEach(function (reward) {
+          if (entry) {
+            reward.platinum = entry.s;
+            markReward(reward, { Source: 'live', Loading: false, Error: '' });
+          } else {
+            markReward(reward, { Loading: false, Error: res.error || 'nolistings' });
+          }
+        });
+      });
     });
   }
 
@@ -845,9 +902,8 @@
   // Added to the reward card template before Vue compiles it (see the plugin hook below).
   function relicInfoTemplate() {
     return '<div class="afru-relicInfo" translate="no">' +
-      '<span v-if="relic.afruSource" class="afru-relicSource" :data-source="relic.afruSource" :title="relic.afruSource==\'live\'?\'' +
-        L('Цена по текущим заказам warframe.market', 'Live warframe.market orders') + '\':\'' +
-        L('Средняя цена сделок за сутки на warframe.market, уточняется', 'Daily average on warframe.market, refining') + '\'"></span>' +
+      '<span v-if="relic.afruSource || relic.afruLoading" class="afru-relicSource" role="img" :data-source="relic.afruSource || null" ' +
+        ':data-loading="relic.afruLoading ? \'\' : null" :title="relic.afruTitle" :aria-label="relic.afruTitle"></span>' +
       '<span v-if="relic.platinum>0 && relic.ducats>0" class="afru-relicRatio" title="' +
         L('Дукатов за 1 платину. От 10 и выше обычно выгоднее сдать Баро за дукаты', 'Ducats per platinum') + '">' +
         '{{ (relic.ducats / relic.platinum).toFixed(1) }} ' + L('дук/пл', 'duc/pl') + '</span>' +

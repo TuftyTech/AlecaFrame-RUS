@@ -388,7 +388,7 @@ test('relic overlay: no "best" highlight without prices, live prices move it', a
   win.close();
 });
 
-test('relic overlay: distinct rewards are requested together, cached ones show at once', async () => {
+test('relic overlay: every reward is asked again each time the window opens, cached ones show meanwhile', async () => {
   const { win, doc } = open('relicOverlay.html', RELICS, {
     storage: {
       'afru.prices': JSON.stringify({
@@ -400,7 +400,7 @@ test('relic overlay: distinct rewards are requested together, cached ones show a
   const calls = [];
   let inFlight = 0;
   let maxInFlight = 0;
-  const prices = { 'Stale Part': 9, 'Part A': 15, 'Part B': 25, 'Part C': 35, 'Part D': 45 };
+  const prices = { 'Fresh Part': 41, 'Stale Part': 9, 'Part A': 15, 'Part B': 25, 'Part C': 35, 'Part D': 45 };
   win.plugin = {
     get: () => ({
       GetBuySellWindowData(name, cb) {
@@ -422,9 +422,29 @@ test('relic overlay: distinct rewards are requested together, cached ones show a
   // Vue runs the watcher before the next render, so the first frame already has these.
   await win.relicsApp.$nextTick();
   assert.deepEqual([...doc.querySelectorAll('.relic')].map((r) => r.textContent.trim()), ['40', '7', '1', '1'], 'cached prices replace AlecaFrame ones right away');
-  await waitFor(() => rewards()[3] === 15, 'live prices');
-  assert.deepEqual(rewards(), [40, 9, 15, 15]);
-  assert.deepEqual(calls, ['Stale Part', 'Part A'], 'one request per distinct stale reward');
+  const first = win.relicsApp.relics[0];
+  assert.equal(first.afruSource, 'cached');
+  assert.equal(first.afruLoading, true);
+  assert.equal(first.afruTitle, 'Цена по заказам warframe.market 1 мин назад. Запрашиваются текущие заказы...');
+  assert.equal(win.relicsApp.relics[2].afruSource, 'af', 'a price without a cache is AlecaFrame\'s own');
+  await waitFor(() => rewards()[3] === 15 && rewards()[0] === 41, 'live prices');
+  assert.deepEqual(rewards(), [41, 9, 15, 15], 'a recent price is refreshed as well');
+  assert.deepEqual(calls, ['Fresh Part', 'Stale Part', 'Part A'], 'one request per distinct reward');
+  assert.deepEqual(win.relicsApp.relics.map((r) => [r.afruSource, r.afruLoading]), Array(4).fill(['live', false]));
+  assert.match(first.afruTitle, /^Свежая цена/);
+
+  calls.length = 0;
+  win.relicsApp.relics = [{ name: 'Part A', platinum: 1, detected: true }];
+  await win.relicsApp.$nextTick();
+  assert.equal(win.relicsApp.relics[0].platinum, 15, 'the price from the last window shows at once');
+  await new Promise((r) => setTimeout(r, 60));
+  assert.deepEqual(calls, [], 'the same reward is not asked twice within a few seconds');
+
+  win.__AF_RU_EXTRAS__.config.relicRequestReuseMs = 0;
+  prices['Part A'] = 13;
+  win.relicsApp.relics = [{ name: 'Part A', platinum: 1, detected: true }];
+  await waitFor(() => win.relicsApp.relics[0].platinum === 13, 'the next window gets current orders');
+  assert.deepEqual(calls, ['Part A']);
 
   calls.length = 0;
   win.relicsApp.relics = ['Part B', 'Part C', 'Part D', 'Part E'].map((name) => ({ name, platinum: 1, detected: true }));
@@ -444,6 +464,25 @@ test('relic overlay: AlecaFrame start is not delayed until window.onload', async
   assert.equal(win.eval('started'), 1);
   win.dispatchEvent(new win.Event('load'));
   assert.equal(win.eval('started'), 1, 'the later onload call is skipped by AlecaFrame itself');
+  win.close();
+});
+
+test('relic overlay: a reward without current orders keeps its placeholder and says why', async () => {
+  const { win } = open('relicOverlay.html', RELICS, {
+    market: {},
+    storage: { 'afru.bulkPrices': JSON.stringify({ t: Date.now(), p: { 'braton prime receiver': 7 } }) },
+  });
+  win.eval(RELIC_APP);
+  await waitFor(() => win.__AF_RU_EXTRAS__.ready.setupRelicOverlay, 'relic overlay hooks');
+  win.relicsApp.relics = [{ name: 'Braton Prime Receiver', platinum: -1, detected: true }];
+  await win.relicsApp.$nextTick();
+  const reward = () => win.relicsApp.relics[0];
+  assert.equal(reward().platinum, 7);
+  assert.deepEqual([reward().afruSource, reward().afruLoading], ['avg', true]);
+  await waitFor(() => reward().afruLoading === false, 'the request to finish');
+  assert.equal(reward().platinum, 7);
+  assert.equal(reward().afruSource, 'avg');
+  assert.match(reward().afruTitle, /^Средняя цена сделок за сутки на warframe\.market\. Текущие заказы получить не удалось$/);
   win.close();
 });
 
