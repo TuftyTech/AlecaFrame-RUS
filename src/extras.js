@@ -3,6 +3,7 @@
  *  - «Графит»: our own dark color theme over AlecaFrame's CSS variables.
  *  - Inventory: manual price refresh from warframe.market through AlecaFrame's
  *    own market client (plugin.GetBuySellWindowData, the call behind the WTS/WTB panel).
+ *  - Inventory: a click on an item name copies its Russian name (English without a translation).
  *  - Relic reward overlay: current warframe.market orders for every reward each time the window opens
  *    (same client as the Inventory button), with an instant placeholder until they arrive (an earlier
  *    price or the preloaded daily average); ducats per platinum and missing set parts on each card;
@@ -46,6 +47,8 @@
     requestsPerSecond: 3,
     maxParallelRequests: 3,
     requestTimeoutMs: 15000,
+    // How long «Скопировано» stays on an inventory card.
+    copiedMs: 1500,
     setupPollMs: 100,
     setupPollLimit: 600,
   };
@@ -633,6 +636,102 @@
     return true;
   }
 
+  // ------------------------------------------------------ inventory: copy name
+
+  // The text itself: the name row is wider than the name, and the rest of the row belongs to the card.
+  var NAME_TEXT = '#inventoryObjectContainer > .inventoryObject .inventoryItemName > span';
+  var copiedTimers = typeof WeakMap === 'function' ? new WeakMap() : null;
+
+  function normalizeName(s) { return String(s == null ? '' : s).replace(/\s+/g, ' ').trim(); }
+
+  function nameTextOf(event) {
+    var target = event && event.target;
+    if (target && target.nodeType !== 1) target = target.parentNode;
+    return target && target.closest ? target.closest(NAME_TEXT) : null;
+  }
+
+  /** The card's item in inventoryApp.items, or null while the card shows something else (a render in progress). */
+  function cardItem(card, label) {
+    var index = 0;
+    for (var c = card.previousElementSibling; c; c = c.previousElementSibling) {
+      if (c.classList.contains('inventoryObject')) index++;
+    }
+    var item = inventoryItems()[index];
+    if (!item || !item.name) return null;
+    var shown = normalizeName(label.textContent);
+    var name = normalizeName(item.name);
+    return shown === name || shown === normalizeName(displayedName(name)) ? item : null;
+  }
+
+  /*
+   * The English name comes from AlecaFrame's data. The card text is only a fallback, read the way
+   * AlecaFrame reads it: the localizer shows the original text meanwhile (READ_BACK in localizer.js).
+   */
+  function englishName(card, label) {
+    var item = cardItem(card, label);
+    if (item) return normalizeName(item.name);
+    var ru = root.__AF_RU__;
+    var read = function () { return label.textContent; };
+    return normalizeName(ru && typeof ru.withSourceText === 'function' ? ru.withSourceText(label, read, null, []) : read());
+  }
+
+  /** The Russian name, or the English one when there is none or the interface is in English. */
+  function copiedName(name) {
+    var ru = root.__AF_RU__;
+    if (!ru || ru.active === false || typeof ru.items !== 'function') return name;
+    var items = ru.items() || {};
+    return Object.prototype.hasOwnProperty.call(items, name) && items[name] ? items[name] : name;
+  }
+
+  /** Resolves to true once the text is on the clipboard. Overwolf windows may lack focus for navigator.clipboard. */
+  function placeOnClipboard(text) {
+    var utils = root.overwolf && root.overwolf.utils;
+    if (utils && typeof utils.placeOnClipboard === 'function') {
+      try {
+        utils.placeOnClipboard(text);
+        return Promise.resolve(true);
+      } catch (e) { warn('overwolf.utils.placeOnClipboard failed', e); }
+    }
+    var clipboard = root.navigator && root.navigator.clipboard;
+    if (!clipboard || typeof clipboard.writeText !== 'function') return Promise.resolve(false);
+    return clipboard.writeText(text).then(function () { return true; }, function (e) { warn('clipboard unavailable', e); return false; });
+  }
+
+  // Drawn by CSS from the attribute in place of the name: the text that AlecaFrame reads back stays as it was.
+  function showCopied(label) {
+    label.setAttribute('data-afru-copied', L('Скопировано', 'Copied'));
+    if (!copiedTimers) return;
+    root.clearTimeout(copiedTimers.get(label));
+    copiedTimers.set(label, root.setTimeout(function () { label.removeAttribute('data-afru-copied'); }, config.copiedMs));
+  }
+
+  // Capture phase on the document: runs before the card's own click handler (the item window)
+  // and does not depend on Vue keeping the list elements.
+  function onNameClick(event) {
+    var text = nameTextOf(event);
+    if (!text) return;
+    event.stopPropagation();
+    var label = text.parentElement;
+    var card = label.closest('#inventoryObjectContainer > .inventoryObject');
+    var name = englishName(card, label);
+    if (!name) return;
+    placeOnClipboard(copiedName(name)).then(function (copied) { if (copied) showCopied(label); });
+  }
+
+  function onNameHover(event) {
+    var text = nameTextOf(event);
+    if (!text) return;
+    var hint = L('Нажмите, чтобы скопировать', 'Click to copy');
+    if (text.title !== hint) text.title = hint;
+  }
+
+  function setupNameCopy() {
+    if (!root.inventoryApp) return false;
+    doc.addEventListener('click', onNameClick, true);
+    doc.addEventListener('mouseover', onNameHover, true);
+    return true;
+  }
+
   // ---------------------------------------------------------- settings tab
 
   function syncSettingsUi() {
@@ -1053,7 +1152,7 @@
   };
 
   if (page === 'main') {
-    whenReady([setupInventory, setupSettingsTab, setupAdStrip]);
+    whenReady([setupInventory, setupNameCopy, setupSettingsTab, setupAdStrip]);
     // Ahead of the first reward screen, so the overlay never waits for it.
     root.setTimeout(function () { loadBulkPrices(); }, 3000);
   }

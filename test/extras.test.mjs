@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 const VUE = fs.readFileSync(require.resolve('vue/dist/vue.global.prod.js'), 'utf8');
 const BUNDLE = bundle({ exact: {}, patterns: {} });
 
-function open(page, body, { storage = {}, market } = {}) {
+function open(page, body, { storage = {}, market, script = BUNDLE, before } = {}) {
   const dom = new JSDOM(`<!doctype html><html><head></head><body>${body}</body></html>`, {
     url: `http://localhost/web/${page}`,
     runScripts: 'outside-only',
@@ -27,8 +27,9 @@ function open(page, body, { storage = {}, market } = {}) {
       }),
     };
   }
+  if (before) before(win);
   win.eval(VUE);
-  win.eval(BUNDLE);
+  win.eval(script);
   win.__AF_RU_EXTRAS__.config.requestsPerSecond = 1000;
   return { dom, win, doc: win.document, calls };
 }
@@ -281,6 +282,108 @@ test('inventory: reports a missing market client instead of failing silently', a
   assert.equal(chip.getAttribute('data-state'), 'error');
   assert.equal(chip.querySelector('.afru-chipMeta').textContent, 'нет связи');
   assert.equal(win.inventoryApp.items[0].sellPrice, 20);
+  win.close();
+});
+
+const COPY_BUNDLE = bundle({ exact: {}, patterns: {}, items: { 'Ash Prime Neuroptics Blueprint': 'Эш Прайм: Нейрооптика (Чертёж)' } });
+const COPY_INVENTORY = `
+  <div id="tabInventory">
+    <div class="foundryTopSettings"><div class="foundryTopSettingsSide right"></div></div>
+    <div id="inventoryObjectContainer">
+      <div v-for="item in items" class="inventoryObject" :key="item.name" @click="itemClicked(item)">
+        <div class="inventoryItemName" rank="0"><span class="normalItem">{{item.name}}</span></div>
+        <span class="inventorySellPrice">{{item.sellPrice}}</span>
+      </div>
+    </div>
+  </div>`;
+const COPY_ITEMS = [
+  { name: 'Ash Prime Neuroptics Blueprint', type: 'part', sellPrice: 20 },
+  { name: 'Primed Continuity', type: 'mod', currentModRank: 0, sellPrice: 60 },
+];
+
+/** Inventory with AlecaFrame's card click (the item window) and its warframe.market read-back. */
+async function openCopyInventory(storage = {}) {
+  const copied = [];
+  const readBack = [];
+  const env = open('main.html', COPY_INVENTORY, {
+    storage,
+    script: COPY_BUNDLE,
+    before(win) {
+      win.overwolf = { utils: { placeOnClipboard: (text) => copied.push(text) } };
+      // Same lookup as AlecaFrame's onBuySellItemClicked (jsdom has no innerText).
+      win.onBuySellItemClicked = (event) => readBack.push(event.target.closest('.inventoryObject').getElementsByClassName('inventoryItemName')[0].textContent);
+    },
+  });
+  const { win, doc } = env;
+  win.eval(`inventoryApp = Vue.createApp({
+    data: () => ({ items: ${JSON.stringify(COPY_ITEMS)}, opened: [] }),
+    methods: { itemClicked(item) { this.opened.push(item.name); } },
+  }).mount('#tabInventory')`);
+  await waitFor(() => win.__AF_RU_EXTRAS__.ready.setupNameCopy, 'copy hook');
+  const cards = () => [...doc.querySelectorAll('#inventoryObjectContainer > .inventoryObject')];
+  const label = (i) => cards()[i].querySelector('.inventoryItemName');
+  const name = (i) => label(i).querySelector('span');
+  const opened = () => [...win.inventoryApp.opened];
+  return { ...env, copied, readBack, cards, label, name, opened };
+}
+
+test('inventory: a click on the name copies the Russian name, without a translation the English one', async () => {
+  const { win, doc, copied, readBack, cards, label, name, opened } = await openCopyInventory();
+  win.__AF_RU_EXTRAS__.config.copiedMs = 40;
+  await waitFor(() => label(0).textContent === 'Эш Прайм: Нейрооптика (Чертёж)', 'translated card');
+
+  name(0).dispatchEvent(new win.MouseEvent('mouseover', { bubbles: true }));
+  assert.equal(name(0).title, 'Нажмите, чтобы скопировать');
+
+  name(0).click();
+  assert.deepEqual(copied, ['Эш Прайм: Нейрооптика (Чертёж)']);
+  name(1).click();
+  assert.deepEqual(copied, ['Эш Прайм: Нейрооптика (Чертёж)', 'Primed Continuity'], 'no translation: English');
+  assert.deepEqual(opened(), [], 'a click on the name does not open the item window');
+
+  label(1).click();
+  cards()[0].querySelector('.inventorySellPrice').click();
+  assert.deepEqual(opened(), ['Primed Continuity', 'Ash Prime Neuroptics Blueprint'], 'the rest of the card, the name row around the text included, opens it as before');
+  assert.equal(copied.length, 2);
+
+  await waitFor(() => label(0).getAttribute('data-afru-copied') === 'Скопировано', '«Скопировано»');
+  assert.ok(!cards()[0].textContent.includes('Скопировано'), 'the card text stays as it was');
+  assert.equal(label(0).textContent, 'Эш Прайм: Нейрооптика (Чертёж)');
+  const css = doc.getElementById('afru-extras-style').textContent;
+  assert.match(css, /\.inventoryItemName\[data-afru-copied\]::before \{[^}]*content: attr\(data-afru-copied\)/,
+    'the confirmation is generated content, which innerText leaves out');
+  assert.match(css, /\.inventoryItemName\[data-afru-copied\] > span \{[^}]*color: transparent/,
+    'the name is hidden by color, not visibility, so innerText keeps it');
+
+  win.onBuySellItemClicked({ target: cards()[0].querySelector('.inventorySellPrice') });
+  assert.deepEqual(readBack, ['Ash Prime Neuroptics Blueprint'], 'warframe.market lookup still gets the English name');
+
+  await waitFor(() => !label(0).hasAttribute('data-afru-copied'), '«Скопировано» to go away');
+  win.close();
+});
+
+test('inventory: with the English interface the English name is copied', async () => {
+  const { win, copied, cards, label, name } = await openCopyInventory({ 'afru.lang': 'en' });
+  await win.inventoryApp.$nextTick();
+  assert.equal(win.__AF_RU__.active, false);
+  assert.equal(label(0).textContent, 'Ash Prime Neuroptics Blueprint');
+  name(0).dispatchEvent(new win.MouseEvent('mouseover', { bubbles: true }));
+  assert.equal(name(0).title, 'Click to copy');
+  name(0).click();
+  assert.deepEqual(copied, ['Ash Prime Neuroptics Blueprint']);
+  await waitFor(() => label(0).getAttribute('data-afru-copied') === 'Copied', 'confirmation');
+  win.close();
+});
+
+test('inventory: a click while the list re-renders copies the name shown on that card', async () => {
+  const { win, copied, label, name, opened } = await openCopyInventory();
+  await waitFor(() => label(0).textContent === 'Эш Прайм: Нейрооптика (Чертёж)', 'translated card');
+  // The data already has the new order, the cards are redrawn on the next tick.
+  win.inventoryApp.items.reverse();
+  name(0).click();
+  assert.deepEqual(copied, ['Эш Прайм: Нейрооптика (Чертёж)']);
+  assert.equal(label(0).textContent, 'Эш Прайм: Нейрооптика (Чертёж)', 'the card shows Russian again right away');
+  assert.deepEqual(opened(), []);
   win.close();
 });
 

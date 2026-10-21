@@ -1,6 +1,6 @@
 {
   "name": "alecaframe-rus",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "description": "Русификатор AlecaFrame для Warframe: перевод, поиск на русском, вкладка «Где фармить» и мгновенные цены warframe.market",
   "type": "module",

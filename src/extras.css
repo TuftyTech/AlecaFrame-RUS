@@ -89,6 +89,52 @@
     pointer-events: none;
 }
 
+/* Inventory: a click on the item name copies it, then «Скопировано» takes the name's place for a
+   moment. The confirmation is generated content and the name only turns transparent, so the text
+   AlecaFrame reads back (innerText) stays the item name. */
+#inventoryObjectContainer > .inventoryObject .inventoryItemName > span {
+    cursor: pointer;
+}
+
+#inventoryObjectContainer > .inventoryObject .inventoryItemName > span:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: var(--color-navigation-hover);
+}
+
+#inventoryObjectContainer > .inventoryObject .inventoryItemName[data-afru-copied] {
+    position: relative;
+}
+
+#inventoryObjectContainer > .inventoryObject .inventoryItemName[data-afru-copied] > span {
+    color: transparent;
+    text-decoration-color: transparent;
+}
+
+#inventoryObjectContainer > .inventoryObject .inventoryItemName[data-afru-copied]::before {
+    content: attr(data-afru-copied);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-buy-active);
+    pointer-events: none;
+    animation: afru-fade-in 0.12s ease-out;
+}
+
+@keyframes afru-fade-in {
+    from { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #inventoryObjectContainer > .inventoryObject .inventoryItemName[data-afru-copied]::before { animation: none; }
+}
+
 /* Settings → «Сворачивать рекламный блок»: the block shrinks to its Patreon line and the
    timers panel takes the freed space, in the side column and in the bottom row alike. */
 .afru-adExpand {
