@@ -26,15 +26,15 @@ body:
       description: |
         видна в «Параметры → Приложения → AlecaFrame-RUS» или в package.json архива
         пожалуйста, НЕ пишите «последняя», она меняется с каждым релизом
-      placeholder: 0.5.0
+      placeholder: 0.6.0
     validations:
       required: true
   - type: input
     id: alecaframe
     attributes:
       label: версии AlecaFrame и Overwolf
-      description: установка пишет их строкой «AlecaFrame 2.6.90, Overwolf 0.310.1.1»
-      placeholder: AlecaFrame 2.6.90, Overwolf 0.310.1.1
+      description: установка пишет их строкой «AlecaFrame 2.6.95, Overwolf 0.310.1.1»
+      placeholder: AlecaFrame 2.6.95, Overwolf 0.310.1.1
     validations:
       required: true
   - type: dropdown

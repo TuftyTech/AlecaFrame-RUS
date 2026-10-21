@@ -1,5 +1,5 @@
 // Shows AlecaFrame-RUS's own features on the real AlecaFrame pages with mock game data
-// in headless Chrome: the inventory price refresh, the settings tab, the «Графит» theme
+// in headless Chrome: the inventory price refresh and name copying, the settings tab, the «Графит» theme
 // and the relic reward overlay (rewards, live prices, unknown prices, unsupported language).
 // Usage: node tools/preview-features.mjs <AlecaFrame dir> [outDir]
 import fs from 'node:fs';
@@ -63,6 +63,7 @@ function mockScript({ relic = 'rewards', storage = {} }) {
       return INVENTORY.slice().sort((a, b) => dir * ((a.sellPrice || 0) - (b.sellPrice || 0)));
     };
     window.__AFRU_LOOKUPS__ = [];
+    window.__AFRU_CLIPBOARD__ = [];
     window.__AFRU_MOCK__ = {
       plugin: {
         getFilteredInventory: (filter, all, cb) => later(() => cb(true, JSON.stringify(sorted(filter)), '1 435', '96'), 30),
@@ -81,7 +82,7 @@ function mockScript({ relic = 'rewards', storage = {} }) {
           changeSize: (o, cb) => cb && cb({ success: true }),
           changePosition: (id, l, t, cb) => cb && cb({ success: true }),
         },
-        utils: { getMonitorsList: (cb) => cb({ displays: [{ id: 'm1', dpiY: 96 }] }) },
+        utils: { getMonitorsList: (cb) => cb({ displays: [{ id: 'm1', dpiY: 96 }] }), placeOnClipboard: (text) => window.__AFRU_CLIPBOARD__.push(text) },
         games: { getRunningGameInfo2: (cb) => cb({ success: true, gameInfo: { logicalWidth: 1920, logicalHeight: 1080 } }) },
       },
     };
@@ -134,6 +135,27 @@ async function mainWindow(theme) {
   }));
   const chip = await page.evaluate(() => { const c = document.getElementById('afruPriceRefresh'); return `${c.textContent.trim()} — ${c.title}`; });
 
+  // A click on the second card's name (the first mock item has no picture) copies it and briefly
+  // shows «Скопировано»; the shot is cropped to the first cards so the label stays readable in the README.
+  const cards = page.locator('#inventoryObjectContainer > .inventoryObject');
+  await cards.nth(1).locator('.inventoryItemName > span').first().click();
+  await page.waitForTimeout(150);
+  const boxes = await cards.evaluateAll((els) => els.slice(0, 4).map((e) => e.getBoundingClientRect().toJSON()));
+  const pad = 12;
+  const clip = {
+    x: Math.max(0, boxes[0].left - pad),
+    y: Math.max(0, boxes[0].top - pad),
+    width: Math.max(...boxes.map((b) => b.right)) - boxes[0].left + 2 * pad,
+    height: Math.max(...boxes.map((b) => b.bottom)) - boxes[0].top + 2 * pad,
+  };
+  await page.screenshot({ path: path.join(outDir, `${theme}-inventory-copied.png`), clip });
+  const copied = await page.evaluate(() => ({
+    clipboard: window.__AFRU_CLIPBOARD__.slice(),
+    label: getComputedStyle(document.querySelectorAll('#inventoryObjectContainer .inventoryItemName')[1], '::before').content,
+    cardText: document.querySelectorAll('#inventoryObjectContainer > .inventoryObject')[1].innerText.replace(/\s+/g, ' ').trim(),
+  }));
+  await page.waitForTimeout(1600);
+
   // «Продам» on the first card: AlecaFrame reads the card's name back and must get the English one.
   await page.evaluate(() => { window.__AFRU_LOOKUPS__.length = 0; });
   // The cards are re-rendered right after a refresh, so a click can land on a replaced card;
@@ -167,14 +189,21 @@ async function mainWindow(theme) {
   await page.click('[tabid="generalSettingsTab"]');
   await page.waitForTimeout(200);
   await shot(page, `${theme}-settings-general`);
+  // AlecaFrame 2.6.95 added a supporters-only note for the release channel here.
+  await page.click('[tabid="premiumTab"]');
+  await page.waitForTimeout(200);
+  await shot(page, `${theme}-settings-premium`);
+  const premiumOverflows = await page.evaluate(collectOverflows, '#premiumTab');
   await page.evaluate(() => { window.settingsApp.visible = false; });
   await page.locator('.menuItem[tabId="tabFoundry"]').click({ force: true });
   await page.waitForTimeout(300);
   await shot(page, `${theme}-foundry`);
 
   report.push(`## main.html, theme=${theme} (page errors: ${errors.length})`, `  chip: ${chip}`, ...prices.map((p) => `  ${p}`));
+  report.push(`  name click copied ${JSON.stringify(copied.clipboard)}, label ${copied.label}, card text «${copied.cardText}»`);
   report.push(`  «Продам» on «${firstCard}» looked up: ${lookup}`);
   report.push(`  side menu with Analytics and Stats unchecked: ${visibleTabs.join(', ')}`);
+  report.push(`  premium settings tab, clipped texts: ${premiumOverflows.length ? JSON.stringify(premiumOverflows) : 'none'}`);
   report.push(...errors.map((e) => `  page error: ${e.split('\n')[0]}`));
   await ctx.close();
 }

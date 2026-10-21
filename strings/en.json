@@ -1,5 +1,5 @@
 {
-  "alecaframeVersion": "2.6.90",
+  "alecaframeVersion": "2.6.95",
   "strings": {
     "\"Custom Menu Scale\" value:": {
       "files": [
@@ -4689,8 +4689,7 @@
     },
     "Premium features are only available to Patreon T2+ supporters": {
       "files": [
-        "main_parts/proAnalytics.html",
-        "main_parts/settings.html"
+        "main_parts/proAnalytics.html"
       ],
       "types": [
         "html"
@@ -4928,6 +4927,14 @@
         "js"
       ]
     },
+    "Release channel selection is only available to supporters": {
+      "files": [
+        "main_parts/settings.html"
+      ],
+      "types": [
+        "html"
+      ]
+    },
     "Release channel:": {
       "files": [
         "main_parts/settings.html"
@@ -5040,8 +5047,7 @@
         "AFBuilds.html",
         "SquadMakingMain.html",
         "SquadMakingSquad.html",
-        "main.html",
-        "rivenOverlay.html"
+        "main.html"
       ],
       "types": [
         "html"

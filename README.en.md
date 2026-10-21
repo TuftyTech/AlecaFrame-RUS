@@ -13,7 +13,7 @@ Russian localization for AlecaFrame, the Warframe companion app: full translatio
 
 # 🎉 Features
 
-- **Translation:** 900 of 900 interface strings of AlecaFrame 2.6.90, item names from the official Russian Warframe localization, the full item details window. Terms match the Russian game client.
+- **Translation:** 901 of 901 interface strings of AlecaFrame 2.6.95, item names from the official Russian Warframe localization, the full item details window. Terms match the Russian game client.
 - **Copy item names:** a click on an item name in the Inventory tab copies its Russian name to the clipboard (the English one when there is no translation or the interface is set to English). «Скопировано» briefly takes the name's place; the item window does not open, the rest of the card works as before.
 - **Russian search in every search field:** Foundry, Inventory, Relics, Rivens, WFMarket. Word prefixes in any order, wrong keyboard layout («ytrjhf» = «некора»), accidental matches dropped («эш» finds Ash, not Fl**ash**).
 - **Where to farm:** for a relic, where it drops and which fissures of its era are open right now; for a Prime part, which relics give it and whether they are vaulted; active fissures by era (normal, Steel Path, Void Storms), fast missions first; which era of *your* relics to crack now. Data from [api.warframestat.us](https://api.warframestat.us).

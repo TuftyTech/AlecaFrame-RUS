@@ -549,7 +549,7 @@
     if (!lastRefresh) {
       meta.textContent = '';
       chip.title = 'Загрузить текущие цены warframe.market (игроки онлайн) для показанных предметов. ' +
-        'Зелёная точка на карточке — цена обновлена.';
+        'Зелёная точка на карточке: цена обновлена.';
     } else if (lastRefresh.error) {
       meta.textContent = 'нет связи';
       chip.title = 'AlecaFrame не ответил на запрос к warframe.market. Проверьте, что игра и AlecaFrame запущены, и попробуйте ещё раз.';
@@ -558,7 +558,7 @@
       chip.title = (lastRefresh.stopped ? 'Остановлено в ' : 'Обновлено в ') + formatTime(lastRefresh.at) + ': ' +
         lastRefresh.updated + ' из ' + lastRefresh.total + '.' +
         (lastRefresh.failed ? ' Без заказов на warframe.market: ' + lastRefresh.failed + '.' : '') +
-        ' Зелёная точка на карточке — цена обновлена. Нажмите, чтобы обновить снова.';
+        ' Зелёная точка на карточке: цена обновлена. Нажмите, чтобы обновить снова.';
     }
   }
 
@@ -764,7 +764,7 @@
   function buildSettingsTab() {
     var themeSelect = el('select', { id: 'afruTheme', 'class': 'settingsSelect' }, [
       el('option', { value: 'default' }, ['Стандартная AlecaFrame']),
-      el('option', { value: 'graphite' }, ['Графит — нейтральная тёмная']),
+      el('option', { value: 'graphite' }, ['Графит (нейтральная тёмная)']),
     ]);
     var clearButton = el('button', { 'class': 'buttonSettingsTest', type: 'button' }, ['Сбросить сохранённые цены']);
     var clearStatus = el('span', { 'class': 'afru-settingsStatus', 'aria-live': 'polite' });

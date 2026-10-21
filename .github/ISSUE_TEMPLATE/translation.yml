@@ -25,7 +25,7 @@ body:
     id: alecaframe
     attributes:
       label: версия AlecaFrame
-      placeholder: 2.6.90
+      placeholder: 2.6.95
     validations:
       required: true
   - type: textarea
